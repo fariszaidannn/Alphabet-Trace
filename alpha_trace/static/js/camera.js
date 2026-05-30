@@ -57,21 +57,22 @@ const Camera = (() => {
       _lastTime = now;
 
       try {
-        const results = _handLandmarker.detectForVideo(_video, now);
+        // MediaPipe expects integer timestamps in ms
+        const timestamp = Math.round(now);
+        const results = _handLandmarker.detectForVideo(_video, timestamp);
 
         if (!results.landmarks || results.landmarks.length === 0) {
           if (_onResult) _onResult({ detected: false });
           return;
         }
 
-        // landmarks[0] = first hand, [8] = INDEX_FINGER_TIP
         const tip = results.landmarks[0][8];
         if (_onResult) {
           _onResult({ detected: true, x: tip.x, y: tip.y, confidence: 1.0 });
         }
       } catch (err) {
-        // Log but don't crash the loop
-        console.warn('[Camera] detectForVideo error:', err.message);
+        console.error('[Camera] detectForVideo error:', err);
+        if (_onResult) _onResult({ detected: false, error: err.message });
       }
     }
     _rafId = requestAnimationFrame(tick);
@@ -79,9 +80,9 @@ const Camera = (() => {
 
   /* ── Initialise HandLandmarker (downloads WASM + model) ── */
   async function _initHandLandmarker() {
-    if (_handLandmarker) return; // already initialised
+    if (_handLandmarker) return;
 
-    console.log('[Camera] Loading MediaPipe Tasks Vision…');
+    console.log('[Camera] Initialising MediaPipe Tasks Vision...');
 
     const { FilesetResolver, HandLandmarker } = await import(
       'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/vision_bundle.mjs'
@@ -95,7 +96,7 @@ const Camera = (() => {
       baseOptions: {
         modelAssetPath:
           'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',
-        delegate: 'GPU'
+        delegate: 'CPU' // CPU is more compatible for web fallback
       },
       runningMode: 'VIDEO',
       numHands: 1,
@@ -134,6 +135,9 @@ const Camera = (() => {
       await _video.play().catch(() => {});
 
       /* 3. Initialise HandLandmarker (first time: downloads ~10 MB of WASM + model) */
+      const reqLabel = document.querySelector('#camera-requesting-overlay p');
+      if (reqLabel) reqLabel.textContent = 'Loading AI model (approx. 10MB)...';
+      
       await _initHandLandmarker();
 
       /* 4. Go */
