@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Explicitly declare camera permission for GitHub Pages / iframe contexts -->
+  <meta http-equiv="Permissions-Policy" content="camera=*" />
   <title>AlphaTrace ✏️</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet" />
@@ -210,8 +212,8 @@
 
   </main>
 
+  <!-- MediaPipe Hands — camera_utils is NOT needed; we drive getUserMedia ourselves -->
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
   <script src="static/js/celebrate.js"></script>
   <script src="static/js/validator.js"></script>
   <script src="static/js/canvas.js"></script>
