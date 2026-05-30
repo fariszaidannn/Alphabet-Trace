@@ -117,6 +117,10 @@ async function init() {
       filterMenu.querySelectorAll('.filter-option').forEach(o => o.classList.remove('active'));
       opt.classList.add('active');
       filterIcon.textContent = opt.textContent.trim().split(' ')[0];
+      const label = document.getElementById('filter-label');
+      if (label) {
+        label.textContent = opt.querySelector('span').textContent;
+      }
       filterBtn.setAttribute('aria-expanded', 'false');
       filterMenu.classList.add('hidden');
       FilterEngine.setMode(mode);

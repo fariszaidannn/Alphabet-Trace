@@ -17,28 +17,56 @@ const FilterEngine = (() => {
   let _dst = null;
   let _harris = null;
 
+  let _loadingCv = false;
+
   function _init(filterCanvasEl) {
     _canvas = filterCanvasEl;
     _ctx = filterCanvasEl.getContext('2d', { willReadFrequently: true });
+  }
 
-    if (typeof cv !== 'undefined' && cv.Mat) {
-      _onOpenCvReady();
-    } else {
-      // Poll for OpenCV readiness
+  function _loadOpenCv() {
+    if (_loadingCv || _cvReady) return;
+    _loadingCv = true;
+    console.log('[Filter] Dynamically loading OpenCV.js (approx. 8MB)...');
+
+    const label = document.getElementById('filter-label');
+    if (label) label.textContent = 'Loading...';
+
+    const script = document.createElement('script');
+    script.src = 'https://docs.opencv.org/4.10.0/opencv.js';
+    script.async = true;
+    script.type = 'text/javascript';
+
+    script.onload = () => {
       const checkCv = setInterval(() => {
         if (typeof cv !== 'undefined' && cv.runtimeInitialized) {
           clearInterval(checkCv);
           _onOpenCvReady();
         }
       }, 100);
-    }
+    };
+
+    script.onerror = (err) => {
+      console.error('[Filter] Failed to load OpenCV.js:', err);
+      _loadingCv = false;
+      if (label) label.textContent = 'Error';
+    };
+
+    document.body.appendChild(script);
   }
 
   function _onOpenCvReady() {
     console.log('[Filter] OpenCV.js ready ✓');
     _cvReady = true;
-    
-    // Allocate Mats once (640x480)
+    _loadingCv = false;
+
+    // Restore dropdown label
+    const label = document.getElementById('filter-label');
+    const activeOpt = document.querySelector('.filter-option.active span');
+    if (label && activeOpt) {
+      label.textContent = activeOpt.textContent;
+    }
+
     _src = new cv.Mat(480, 640, cv.CV_8UC4);
     _gray = new cv.Mat();
     _dst = new cv.Mat();
@@ -50,11 +78,14 @@ const FilterEngine = (() => {
   function setMode(mode) {
     const oldMode = _mode;
     _mode = mode;
-    
+
     if (mode === 'normal') {
       stop();
       clearOverlay();
     } else {
+      if (!_cvReady) {
+        _loadOpenCv();
+      }
       if (oldMode === 'normal') _runLoop();
     }
   }
