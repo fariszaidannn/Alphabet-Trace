@@ -235,6 +235,23 @@ button:active { transform: scale(0.95); }
   animation: spin 0.8s linear infinite;
 }
 
+/* ── Loading progress bar in overlay ────────── */
+.loading-progress-wrap {
+  width: 200px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+#cam-req-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #e9c46a;
+  transition: width 0.4s ease;
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }

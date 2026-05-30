@@ -56,7 +56,10 @@
         <!-- Camera requesting overlay -->
         <div id="camera-requesting-overlay" class="hidden">
           <div class="cam-spinner"></div>
-          <p>Waiting for camera permission…</p>
+          <p id="cam-req-label">Waiting for camera permission…</p>
+          <div id="cam-req-progress-wrap" class="loading-progress-wrap">
+            <div id="cam-req-progress-bar"></div>
+          </div>
         </div>
 
         <!-- Celebration overlay -->

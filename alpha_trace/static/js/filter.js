@@ -110,17 +110,22 @@ const FilterEngine = (() => {
           cv.imshow(_canvas, _src);
           
           // Threshold the harris response and draw dots manually
-          // harris is CV_32F; we access values via data32F
           const data = _harris.data32F;
+          const rows = _harris.rows;
+          const cols = _harris.cols;
+          
+          // Optimization: Pre-calculate threshold and use a faster loop
           const maxVal = _getMax(_harris);
           const threshold = 0.01 * maxVal;
 
-          _ctx.fillStyle = '#ff00c8'; // Magenta markers like Python
-          for (let y = 0; y < _harris.rows; y += 2) { // step 2 for speed
-            for (let x = 0; x < _harris.cols; x += 2) {
-              if (data[y * _harris.cols + x] > threshold) {
+          _ctx.fillStyle = '#ff00c8';
+          // Step by 4 for performance — still plenty of dots
+          for (let y = 0; y < rows; y += 4) {
+            const rowOffset = y * cols;
+            for (let x = 0; x < cols; x += 4) {
+              if (data[rowOffset + x] > threshold) {
                 _ctx.beginPath();
-                _ctx.arc(x, y, 2.5, 0, 2 * Math.PI);
+                _ctx.arc(x, y, 2.5, 0, 6.28); // 2*PI approx
                 _ctx.fill();
               }
             }
@@ -151,5 +156,7 @@ const FilterEngine = (() => {
     clearOverlay();
   }
 
-  return { start, stop, setMode, getMode, clearOverlay };
+  function isReady() { return _cvReady; }
+
+  return { start, stop, setMode, getMode, clearOverlay, isReady };
 })();

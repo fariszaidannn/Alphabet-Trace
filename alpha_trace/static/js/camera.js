@@ -27,6 +27,14 @@ const Camera = (() => {
     if (_onStateChange) _onStateChange(s);
   }
 
+  /* ── milestone progress ─────────────────────────────── */
+  function _updateProgress(pct, text) {
+    const bar = document.getElementById('cam-req-progress-bar');
+    const label = document.getElementById('cam-req-label');
+    if (bar) bar.style.width = pct + '%';
+    if (label && text) label.textContent = text;
+  }
+
   /* ── cleanup ───────────────────────────────────────── */
   function _teardown() {
     if (_rafId) {
@@ -40,6 +48,7 @@ const Camera = (() => {
     if (_video) {
       _video.srcObject = null;
     }
+    _updateProgress(0);
   }
 
   /* ── rAF loop — synchronous detectForVideo, throttled ── */
@@ -117,12 +126,14 @@ const Camera = (() => {
 
     _teardown();
     _setState('requesting');
+    _updateProgress(5, 'Waiting for camera permission...');
 
     try {
       /* 1. Camera permission */
       _stream = await navigator.mediaDevices.getUserMedia({
         video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' }
       });
+      _updateProgress(20, 'Camera ready. Loading AI models...');
 
       /* 2. Attach stream to <video> */
       _video.srcObject = _stream;
@@ -133,14 +144,37 @@ const Camera = (() => {
         setTimeout(resolve, 4000);
       });
       await _video.play().catch(() => {});
+      _updateProgress(35, 'Initialising MediaPipe...');
 
       /* 3. Initialise HandLandmarker (first time: downloads ~10 MB of WASM + model) */
-      const reqLabel = document.querySelector('#camera-requesting-overlay p');
-      if (reqLabel) reqLabel.textContent = 'Loading AI model (approx. 10MB)...';
-      
       await _initHandLandmarker();
+      _updateProgress(70, 'MediaPipe ready. Starting filters...');
 
-      /* 4. Go */
+      /* 4. Wait for FilterEngine (OpenCV.js) */
+      if (typeof FilterEngine !== 'undefined') {
+        _updateProgress(85, 'Loading OpenCV.js (approx. 8MB)...');
+        
+        const isFilterReady = () => {
+          if (typeof FilterEngine.isReady === 'function') return FilterEngine.isReady();
+          return typeof cv !== 'undefined' && cv.runtimeInitialized;
+        };
+
+        // Non-blocking async wait
+        await new Promise((resolve) => {
+          let attempts = 0;
+          const check = setInterval(() => {
+            if (isFilterReady() || attempts > 100) {
+              clearInterval(check);
+              resolve();
+            }
+            attempts++;
+          }, 200);
+        });
+      }
+      _updateProgress(100, 'All systems ready!');
+      await new Promise(r => setTimeout(r, 300)); // show 100% for a moment
+
+      /* 5. Go */
       _setState('active');
       _startLoop();
 
