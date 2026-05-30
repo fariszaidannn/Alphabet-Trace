@@ -35,40 +35,7 @@ const FilterEngine = (() => {
   }
 
   function _runLoop() {
-    _interval = setInterval(async () => {
-      if (_mode === 'normal' || _busy) return;
-      const frame = _captureFrame();
-      if (!frame) return;
-      _busy = true;
-      const t0 = performance.now();
-      try {
-        const res  = await fetch('/filter', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ frame, mode: _mode }),
-        });
-        const data = await res.json();
-        const elapsed = performance.now() - t0;
-        if (elapsed > 400) {
-          _slowCount++;
-          if (_slowCount >= 5) { _revertToNormal(); _busy = false; return; }
-        } else {
-          _slowCount = 0;
-        }
-        if (data.filtered && _mode !== 'normal') {
-          const img = new Image();
-          img.onload = () => {
-            if (_mode === 'normal') return;
-            _canvas.width  = _canvas.offsetWidth;
-            _canvas.height = _canvas.offsetHeight;
-            _ctx.clearRect(0, 0, _canvas.width, _canvas.height);
-            _ctx.drawImage(img, 0, 0, _canvas.width, _canvas.height);
-          };
-          img.src = data.filtered;
-        }
-      } catch (_e) { /* silent fail */ }
-      _busy = false;
-    }, 150);
+    // Disabled for static hosting (GitHub Pages)
   }
 
   function _revertToNormal() {

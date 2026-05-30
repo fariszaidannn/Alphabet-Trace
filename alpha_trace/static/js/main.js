@@ -60,8 +60,17 @@ const shapeCirclesCount    = document.getElementById('shape-circles-count');
 const shapeScoreBar        = document.getElementById('shape-score-bar');
 const shapeScorePct        = document.getElementById('shape-score-pct');
 
+let _allLetters = null;
+
 // ── Init ──────────────────────────────────────────────────────────────────────
-function init() {
+async function init() {
+  try {
+    const r = await fetch('static/letters.json');
+    _allLetters = await r.json();
+  } catch (e) {
+    console.error('Failed to load letters.json', e);
+  }
+
   _buildAlphabetGrid();
   _updateCounter();
   _loadLetter(_currentIdx);
@@ -157,17 +166,16 @@ function _loadLetter(idx) {
   _tracePath = [];
   FilterEngine.clearOverlay();
 
-  fetch(`/letter/${ch}`)
-    .then(r => r.json())
-    .then(data => {
-      _letterData = data;
-      infoStroke.textContent = `Stroke 1 of ${data.stroke_count}`;
-      infoHint.textContent = data.hint;
-      CanvasRenderer.setLetter(data);
-      Validator.init(data.waypoints, TOLERANCE, _onWaypointHit, _onLetterComplete);
-      _celebrating = false;
-      _refreshGrid();
-    });
+  const data = _allLetters ? _allLetters[ch] : null;
+  if (data) {
+    _letterData = data;
+    infoStroke.textContent = `Stroke 1 of ${data.stroke_count}`;
+    infoHint.textContent = data.hint;
+    CanvasRenderer.setLetter(data);
+    Validator.init(data.waypoints, TOLERANCE, _onWaypointHit, _onLetterComplete);
+    _celebrating = false;
+    _refreshGrid();
+  }
 }
 
 function _goTo(idx) {
@@ -255,31 +263,6 @@ function _onLetterComplete() {
   _saveCompleted();
   _updateCounter();
   _refreshGrid();
-
-  // Server-side validation (fire and forget for MVP)
-  fetch('/validate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      letter: LETTERS[_currentIdx],
-      path: Validator.getHitArray().map((_, i) => ({ x: 0, y: 0 })),
-    }),
-  }).catch(() => {});
-
-  // Shape analysis
-  fetch('/analyze-shape', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      letter: LETTERS[_currentIdx],
-      path: _tracePath,
-    }),
-  })
-  .then(r => r.json())
-  .then(shapeResult => {
-    _showShapeAnalysis(shapeResult);
-  })
-  .catch(() => {});
 
   // Sound + flash
   Sounds.letterComplete();

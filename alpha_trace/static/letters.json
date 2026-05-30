@@ -1,0 +1,4357 @@
+{
+  "A": {
+    "svg_path": "M50,180 L100,20 L150,180 M70,115 L130,115",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.9
+    },
+    "hint": "Start at bottom left, go up to the peak, then down!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 0
+      },
+      {
+        "x": 0.286,
+        "y": 0.786,
+        "order": 1
+      },
+      {
+        "x": 0.321,
+        "y": 0.671,
+        "order": 2
+      },
+      {
+        "x": 0.357,
+        "y": 0.557,
+        "order": 3
+      },
+      {
+        "x": 0.393,
+        "y": 0.443,
+        "order": 4
+      },
+      {
+        "x": 0.429,
+        "y": 0.329,
+        "order": 5
+      },
+      {
+        "x": 0.464,
+        "y": 0.214,
+        "order": 6
+      },
+      {
+        "x": 0.5,
+        "y": 0.1,
+        "order": 7
+      },
+      {
+        "x": 0.536,
+        "y": 0.214,
+        "order": 8
+      },
+      {
+        "x": 0.571,
+        "y": 0.329,
+        "order": 9
+      },
+      {
+        "x": 0.607,
+        "y": 0.443,
+        "order": 10
+      },
+      {
+        "x": 0.643,
+        "y": 0.557,
+        "order": 11
+      },
+      {
+        "x": 0.679,
+        "y": 0.671,
+        "order": 12
+      },
+      {
+        "x": 0.714,
+        "y": 0.786,
+        "order": 13
+      },
+      {
+        "x": 0.75,
+        "y": 0.9,
+        "order": 14
+      },
+      {
+        "x": 0.35,
+        "y": 0.575,
+        "order": 15
+      },
+      {
+        "x": 0.425,
+        "y": 0.575,
+        "order": 16
+      },
+      {
+        "x": 0.5,
+        "y": 0.575,
+        "order": 17
+      },
+      {
+        "x": 0.575,
+        "y": 0.575,
+        "order": 18
+      },
+      {
+        "x": 0.65,
+        "y": 0.575,
+        "order": 19
+      }
+    ]
+  },
+  "B": {
+    "svg_path": "M50,20 L50,180 M50,20 C130,20 130,98 50,100 C135,102 135,180 50,180",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.1
+    },
+    "hint": "Draw a tall line down, then make two bumps on the right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.25,
+        "y": 0.233,
+        "order": 1
+      },
+      {
+        "x": 0.25,
+        "y": 0.367,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.633,
+        "order": 4
+      },
+      {
+        "x": 0.25,
+        "y": 0.767,
+        "order": 5
+      },
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 6
+      },
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 7
+      },
+      {
+        "x": 0.442,
+        "y": 0.141,
+        "order": 8
+      },
+      {
+        "x": 0.538,
+        "y": 0.238,
+        "order": 9
+      },
+      {
+        "x": 0.538,
+        "y": 0.355,
+        "order": 10
+      },
+      {
+        "x": 0.442,
+        "y": 0.455,
+        "order": 11
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 12
+      },
+      {
+        "x": 0.454,
+        "y": 0.545,
+        "order": 13
+      },
+      {
+        "x": 0.556,
+        "y": 0.645,
+        "order": 14
+      },
+      {
+        "x": 0.556,
+        "y": 0.762,
+        "order": 15
+      },
+      {
+        "x": 0.454,
+        "y": 0.859,
+        "order": 16
+      },
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 17
+      }
+    ]
+  },
+  "C": {
+    "svg_path": "M150,50 C120,10 50,10 35,100 C35,180 115,195 155,155",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.75,
+      "y": 0.25
+    },
+    "hint": "Start on the right, curve all the way around to the left!",
+    "expected_shapes": {
+      "lines": false,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.75,
+        "y": 0.25,
+        "order": 0
+      },
+      {
+        "x": 0.661,
+        "y": 0.168,
+        "order": 1
+      },
+      {
+        "x": 0.551,
+        "y": 0.126,
+        "order": 2
+      },
+      {
+        "x": 0.434,
+        "y": 0.131,
+        "order": 3
+      },
+      {
+        "x": 0.324,
+        "y": 0.191,
+        "order": 4
+      },
+      {
+        "x": 0.233,
+        "y": 0.311,
+        "order": 5
+      },
+      {
+        "x": 0.175,
+        "y": 0.5,
+        "order": 6
+      },
+      {
+        "x": 0.218,
+        "y": 0.701,
+        "order": 7
+      },
+      {
+        "x": 0.329,
+        "y": 0.827,
+        "order": 8
+      },
+      {
+        "x": 0.477,
+        "y": 0.88,
+        "order": 9
+      },
+      {
+        "x": 0.636,
+        "y": 0.862,
+        "order": 10
+      },
+      {
+        "x": 0.775,
+        "y": 0.775,
+        "order": 11
+      }
+    ]
+  },
+  "D": {
+    "svg_path": "M50,20 L50,180 M50,20 C165,20 165,180 50,180",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.1
+    },
+    "hint": "Draw a line down, then curve around to the right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.25,
+        "y": 0.233,
+        "order": 1
+      },
+      {
+        "x": 0.25,
+        "y": 0.367,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.633,
+        "order": 4
+      },
+      {
+        "x": 0.25,
+        "y": 0.767,
+        "order": 5
+      },
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 6
+      },
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 7
+      },
+      {
+        "x": 0.461,
+        "y": 0.144,
+        "order": 8
+      },
+      {
+        "x": 0.602,
+        "y": 0.259,
+        "order": 9
+      },
+      {
+        "x": 0.672,
+        "y": 0.415,
+        "order": 10
+      },
+      {
+        "x": 0.672,
+        "y": 0.585,
+        "order": 11
+      },
+      {
+        "x": 0.602,
+        "y": 0.741,
+        "order": 12
+      },
+      {
+        "x": 0.461,
+        "y": 0.856,
+        "order": 13
+      },
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 14
+      }
+    ]
+  },
+  "E": {
+    "svg_path": "M140,20 L50,20 L50,180 L140,180 M50,100 L120,100",
+    "stroke_count": 3,
+    "start_point": {
+      "x": 0.7,
+      "y": 0.1
+    },
+    "hint": "Draw the top line left, then down, add a middle line, then the bottom!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.7,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.55,
+        "y": 0.1,
+        "order": 1
+      },
+      {
+        "x": 0.4,
+        "y": 0.1,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.28,
+        "order": 4
+      },
+      {
+        "x": 0.25,
+        "y": 0.46,
+        "order": 5
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 6
+      },
+      {
+        "x": 0.25,
+        "y": 0.68,
+        "order": 7
+      },
+      {
+        "x": 0.25,
+        "y": 0.8,
+        "order": 8
+      },
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 9
+      },
+      {
+        "x": 0.4,
+        "y": 0.9,
+        "order": 10
+      },
+      {
+        "x": 0.55,
+        "y": 0.9,
+        "order": 11
+      },
+      {
+        "x": 0.7,
+        "y": 0.9,
+        "order": 12
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 13
+      },
+      {
+        "x": 0.4,
+        "y": 0.5,
+        "order": 14
+      },
+      {
+        "x": 0.55,
+        "y": 0.5,
+        "order": 15
+      },
+      {
+        "x": 0.6,
+        "y": 0.5,
+        "order": 16
+      }
+    ]
+  },
+  "F": {
+    "svg_path": "M140,20 L50,20 L50,180 M50,100 L120,100",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.7,
+      "y": 0.1
+    },
+    "hint": "Draw the top line left, then all the way down, then add a middle line!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.7,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.55,
+        "y": 0.1,
+        "order": 1
+      },
+      {
+        "x": 0.4,
+        "y": 0.1,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.28,
+        "order": 4
+      },
+      {
+        "x": 0.25,
+        "y": 0.46,
+        "order": 5
+      },
+      {
+        "x": 0.25,
+        "y": 0.64,
+        "order": 6
+      },
+      {
+        "x": 0.25,
+        "y": 0.82,
+        "order": 7
+      },
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 8
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 9
+      },
+      {
+        "x": 0.4,
+        "y": 0.5,
+        "order": 10
+      },
+      {
+        "x": 0.55,
+        "y": 0.5,
+        "order": 11
+      },
+      {
+        "x": 0.6,
+        "y": 0.5,
+        "order": 12
+      }
+    ]
+  },
+  "G": {
+    "svg_path": "M150,50 C120,10 50,10 35,100 C35,185 115,200 155,155 L155,100 L100,100",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.75,
+      "y": 0.25
+    },
+    "hint": "Like a C, but at the end bring your finger in to make a shelf!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.75,
+        "y": 0.25,
+        "order": 0
+      },
+      {
+        "x": 0.64,
+        "y": 0.156,
+        "order": 1
+      },
+      {
+        "x": 0.504,
+        "y": 0.122,
+        "order": 2
+      },
+      {
+        "x": 0.367,
+        "y": 0.16,
+        "order": 3
+      },
+      {
+        "x": 0.249,
+        "y": 0.282,
+        "order": 4
+      },
+      {
+        "x": 0.175,
+        "y": 0.5,
+        "order": 5
+      },
+      {
+        "x": 0.218,
+        "y": 0.713,
+        "order": 6
+      },
+      {
+        "x": 0.329,
+        "y": 0.845,
+        "order": 7
+      },
+      {
+        "x": 0.477,
+        "y": 0.898,
+        "order": 8
+      },
+      {
+        "x": 0.636,
+        "y": 0.874,
+        "order": 9
+      },
+      {
+        "x": 0.775,
+        "y": 0.775,
+        "order": 10
+      },
+      {
+        "x": 0.775,
+        "y": 0.637,
+        "order": 11
+      },
+      {
+        "x": 0.775,
+        "y": 0.5,
+        "order": 12
+      },
+      {
+        "x": 0.775,
+        "y": 0.5,
+        "order": 13
+      },
+      {
+        "x": 0.637,
+        "y": 0.5,
+        "order": 14
+      },
+      {
+        "x": 0.5,
+        "y": 0.5,
+        "order": 15
+      }
+    ]
+  },
+  "H": {
+    "svg_path": "M50,20 L50,180 M150,20 L150,180 M50,100 L150,100",
+    "stroke_count": 3,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.1
+    },
+    "hint": "Draw a line down, then another line down on the right, then connect them!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.25,
+        "y": 0.28,
+        "order": 1
+      },
+      {
+        "x": 0.25,
+        "y": 0.46,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.64,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.82,
+        "order": 4
+      },
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 5
+      },
+      {
+        "x": 0.75,
+        "y": 0.1,
+        "order": 6
+      },
+      {
+        "x": 0.75,
+        "y": 0.28,
+        "order": 7
+      },
+      {
+        "x": 0.75,
+        "y": 0.46,
+        "order": 8
+      },
+      {
+        "x": 0.75,
+        "y": 0.64,
+        "order": 9
+      },
+      {
+        "x": 0.75,
+        "y": 0.82,
+        "order": 10
+      },
+      {
+        "x": 0.75,
+        "y": 0.9,
+        "order": 11
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 12
+      },
+      {
+        "x": 0.38,
+        "y": 0.5,
+        "order": 13
+      },
+      {
+        "x": 0.5,
+        "y": 0.5,
+        "order": 14
+      },
+      {
+        "x": 0.63,
+        "y": 0.5,
+        "order": 15
+      },
+      {
+        "x": 0.75,
+        "y": 0.5,
+        "order": 16
+      }
+    ]
+  },
+  "I": {
+    "svg_path": "M70,20 L130,20 M100,20 L100,180 M70,180 L130,180",
+    "stroke_count": 3,
+    "start_point": {
+      "x": 0.35,
+      "y": 0.1
+    },
+    "hint": "Draw the top line, then go straight down, then the bottom line!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.35,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.5,
+        "y": 0.1,
+        "order": 1
+      },
+      {
+        "x": 0.65,
+        "y": 0.1,
+        "order": 2
+      },
+      {
+        "x": 0.5,
+        "y": 0.1,
+        "order": 3
+      },
+      {
+        "x": 0.5,
+        "y": 0.28,
+        "order": 4
+      },
+      {
+        "x": 0.5,
+        "y": 0.46,
+        "order": 5
+      },
+      {
+        "x": 0.5,
+        "y": 0.64,
+        "order": 6
+      },
+      {
+        "x": 0.5,
+        "y": 0.82,
+        "order": 7
+      },
+      {
+        "x": 0.5,
+        "y": 0.9,
+        "order": 8
+      },
+      {
+        "x": 0.35,
+        "y": 0.9,
+        "order": 9
+      },
+      {
+        "x": 0.5,
+        "y": 0.9,
+        "order": 10
+      },
+      {
+        "x": 0.65,
+        "y": 0.9,
+        "order": 11
+      }
+    ]
+  },
+  "J": {
+    "svg_path": "M80,20 L130,20 M110,20 L110,155 C110,195 45,195 40,155",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.4,
+      "y": 0.1
+    },
+    "hint": "Draw the top line, then go down and curve left at the bottom!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.4,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.525,
+        "y": 0.1,
+        "order": 1
+      },
+      {
+        "x": 0.65,
+        "y": 0.1,
+        "order": 2
+      },
+      {
+        "x": 0.55,
+        "y": 0.235,
+        "order": 3
+      },
+      {
+        "x": 0.55,
+        "y": 0.37,
+        "order": 4
+      },
+      {
+        "x": 0.55,
+        "y": 0.505,
+        "order": 5
+      },
+      {
+        "x": 0.55,
+        "y": 0.64,
+        "order": 6
+      },
+      {
+        "x": 0.55,
+        "y": 0.775,
+        "order": 7
+      },
+      {
+        "x": 0.499,
+        "y": 0.887,
+        "order": 8
+      },
+      {
+        "x": 0.384,
+        "y": 0.925,
+        "order": 9
+      },
+      {
+        "x": 0.265,
+        "y": 0.887,
+        "order": 10
+      },
+      {
+        "x": 0.2,
+        "y": 0.775,
+        "order": 11
+      }
+    ]
+  },
+  "K": {
+    "svg_path": "M50,20 L50,180 M50,95 L155,20 M50,95 L155,180",
+    "stroke_count": 3,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.1
+    },
+    "hint": "Draw a line down, then a diagonal up-right from the middle, then down-right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.25,
+        "y": 0.28,
+        "order": 1
+      },
+      {
+        "x": 0.25,
+        "y": 0.46,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.64,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.82,
+        "order": 4
+      },
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 5
+      },
+      {
+        "x": 0.25,
+        "y": 0.48,
+        "order": 6
+      },
+      {
+        "x": 0.4,
+        "y": 0.38,
+        "order": 7
+      },
+      {
+        "x": 0.55,
+        "y": 0.28,
+        "order": 8
+      },
+      {
+        "x": 0.65,
+        "y": 0.18,
+        "order": 9
+      },
+      {
+        "x": 0.75,
+        "y": 0.1,
+        "order": 10
+      },
+      {
+        "x": 0.25,
+        "y": 0.48,
+        "order": 11
+      },
+      {
+        "x": 0.4,
+        "y": 0.58,
+        "order": 12
+      },
+      {
+        "x": 0.55,
+        "y": 0.68,
+        "order": 13
+      },
+      {
+        "x": 0.65,
+        "y": 0.78,
+        "order": 14
+      },
+      {
+        "x": 0.75,
+        "y": 0.9,
+        "order": 15
+      }
+    ]
+  },
+  "L": {
+    "svg_path": "M50,20 L50,180 L155,180",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.1
+    },
+    "hint": "Draw a line straight down, then go right along the bottom!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.25,
+        "y": 0.25,
+        "order": 1
+      },
+      {
+        "x": 0.25,
+        "y": 0.4,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.55,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.7,
+        "order": 4
+      },
+      {
+        "x": 0.25,
+        "y": 0.82,
+        "order": 5
+      },
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 6
+      },
+      {
+        "x": 0.38,
+        "y": 0.9,
+        "order": 7
+      },
+      {
+        "x": 0.51,
+        "y": 0.9,
+        "order": 8
+      },
+      {
+        "x": 0.63,
+        "y": 0.9,
+        "order": 9
+      },
+      {
+        "x": 0.75,
+        "y": 0.9,
+        "order": 10
+      }
+    ]
+  },
+  "M": {
+    "svg_path": "M40,180 L40,20 L100,100 L160,20 L160,180",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.2,
+      "y": 0.9
+    },
+    "hint": "Go up the left side, come down to the middle V, then up and down the right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.2,
+        "y": 0.9,
+        "order": 0
+      },
+      {
+        "x": 0.2,
+        "y": 0.72,
+        "order": 1
+      },
+      {
+        "x": 0.2,
+        "y": 0.54,
+        "order": 2
+      },
+      {
+        "x": 0.2,
+        "y": 0.36,
+        "order": 3
+      },
+      {
+        "x": 0.2,
+        "y": 0.1,
+        "order": 4
+      },
+      {
+        "x": 0.3,
+        "y": 0.28,
+        "order": 5
+      },
+      {
+        "x": 0.4,
+        "y": 0.45,
+        "order": 6
+      },
+      {
+        "x": 0.5,
+        "y": 0.5,
+        "order": 7
+      },
+      {
+        "x": 0.6,
+        "y": 0.45,
+        "order": 8
+      },
+      {
+        "x": 0.7,
+        "y": 0.28,
+        "order": 9
+      },
+      {
+        "x": 0.8,
+        "y": 0.1,
+        "order": 10
+      },
+      {
+        "x": 0.8,
+        "y": 0.28,
+        "order": 11
+      },
+      {
+        "x": 0.8,
+        "y": 0.46,
+        "order": 12
+      },
+      {
+        "x": 0.8,
+        "y": 0.64,
+        "order": 13
+      },
+      {
+        "x": 0.8,
+        "y": 0.82,
+        "order": 14
+      },
+      {
+        "x": 0.8,
+        "y": 0.9,
+        "order": 15
+      }
+    ]
+  },
+  "N": {
+    "svg_path": "M50,180 L50,20 L150,180 L150,20",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.9
+    },
+    "hint": "Go up the left side, then diagonally down-right, then up the right side!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 0
+      },
+      {
+        "x": 0.25,
+        "y": 0.72,
+        "order": 1
+      },
+      {
+        "x": 0.25,
+        "y": 0.54,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.36,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 4
+      },
+      {
+        "x": 0.35,
+        "y": 0.28,
+        "order": 5
+      },
+      {
+        "x": 0.45,
+        "y": 0.46,
+        "order": 6
+      },
+      {
+        "x": 0.55,
+        "y": 0.64,
+        "order": 7
+      },
+      {
+        "x": 0.65,
+        "y": 0.82,
+        "order": 8
+      },
+      {
+        "x": 0.75,
+        "y": 0.9,
+        "order": 9
+      },
+      {
+        "x": 0.75,
+        "y": 0.72,
+        "order": 10
+      },
+      {
+        "x": 0.75,
+        "y": 0.54,
+        "order": 11
+      },
+      {
+        "x": 0.75,
+        "y": 0.36,
+        "order": 12
+      },
+      {
+        "x": 0.75,
+        "y": 0.1,
+        "order": 13
+      }
+    ]
+  },
+  "O": {
+    "svg_path": "M100,20 C160,20 175,180 100,180 C25,180 25,20 100,20",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.5,
+      "y": 0.1
+    },
+    "hint": "Start at the top and draw a big oval all the way around!",
+    "expected_shapes": {
+      "lines": false,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.5,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.602,
+        "y": 0.134,
+        "order": 1
+      },
+      {
+        "x": 0.679,
+        "y": 0.225,
+        "order": 2
+      },
+      {
+        "x": 0.731,
+        "y": 0.353,
+        "order": 3
+      },
+      {
+        "x": 0.753,
+        "y": 0.5,
+        "order": 4
+      },
+      {
+        "x": 0.744,
+        "y": 0.647,
+        "order": 5
+      },
+      {
+        "x": 0.7,
+        "y": 0.775,
+        "order": 6
+      },
+      {
+        "x": 0.62,
+        "y": 0.866,
+        "order": 7
+      },
+      {
+        "x": 0.5,
+        "y": 0.9,
+        "order": 8
+      },
+      {
+        "x": 0.377,
+        "y": 0.866,
+        "order": 9
+      },
+      {
+        "x": 0.289,
+        "y": 0.775,
+        "order": 10
+      },
+      {
+        "x": 0.236,
+        "y": 0.647,
+        "order": 11
+      },
+      {
+        "x": 0.219,
+        "y": 0.5,
+        "order": 12
+      },
+      {
+        "x": 0.236,
+        "y": 0.353,
+        "order": 13
+      },
+      {
+        "x": 0.289,
+        "y": 0.225,
+        "order": 14
+      },
+      {
+        "x": 0.377,
+        "y": 0.134,
+        "order": 15
+      },
+      {
+        "x": 0.5,
+        "y": 0.1,
+        "order": 16
+      }
+    ]
+  },
+  "P": {
+    "svg_path": "M50,180 L50,20 M50,20 C145,20 145,100 50,100",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.9
+    },
+    "hint": "Draw a line up, then make a bump on the upper right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 0
+      },
+      {
+        "x": 0.25,
+        "y": 0.7,
+        "order": 1
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.3,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 4
+      },
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 5
+      },
+      {
+        "x": 0.448,
+        "y": 0.13,
+        "order": 6
+      },
+      {
+        "x": 0.567,
+        "y": 0.204,
+        "order": 7
+      },
+      {
+        "x": 0.606,
+        "y": 0.3,
+        "order": 8
+      },
+      {
+        "x": 0.567,
+        "y": 0.396,
+        "order": 9
+      },
+      {
+        "x": 0.448,
+        "y": 0.47,
+        "order": 10
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 11
+      }
+    ]
+  },
+  "Q": {
+    "svg_path": "M100,20 C165,20 170,180 100,180 C30,180 30,20 100,20 M120,150 L158,185",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.5,
+      "y": 0.1
+    },
+    "hint": "Draw a big O, then add a little tail in the bottom right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.5,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.602,
+        "y": 0.134,
+        "order": 1
+      },
+      {
+        "x": 0.679,
+        "y": 0.225,
+        "order": 2
+      },
+      {
+        "x": 0.731,
+        "y": 0.353,
+        "order": 3
+      },
+      {
+        "x": 0.753,
+        "y": 0.5,
+        "order": 4
+      },
+      {
+        "x": 0.744,
+        "y": 0.647,
+        "order": 5
+      },
+      {
+        "x": 0.7,
+        "y": 0.775,
+        "order": 6
+      },
+      {
+        "x": 0.62,
+        "y": 0.866,
+        "order": 7
+      },
+      {
+        "x": 0.5,
+        "y": 0.9,
+        "order": 8
+      },
+      {
+        "x": 0.377,
+        "y": 0.866,
+        "order": 9
+      },
+      {
+        "x": 0.289,
+        "y": 0.775,
+        "order": 10
+      },
+      {
+        "x": 0.236,
+        "y": 0.647,
+        "order": 11
+      },
+      {
+        "x": 0.219,
+        "y": 0.5,
+        "order": 12
+      },
+      {
+        "x": 0.236,
+        "y": 0.353,
+        "order": 13
+      },
+      {
+        "x": 0.289,
+        "y": 0.225,
+        "order": 14
+      },
+      {
+        "x": 0.377,
+        "y": 0.134,
+        "order": 15
+      },
+      {
+        "x": 0.5,
+        "y": 0.1,
+        "order": 16
+      },
+      {
+        "x": 0.6,
+        "y": 0.75,
+        "order": 17
+      },
+      {
+        "x": 0.663,
+        "y": 0.808,
+        "order": 18
+      },
+      {
+        "x": 0.727,
+        "y": 0.867,
+        "order": 19
+      },
+      {
+        "x": 0.79,
+        "y": 0.925,
+        "order": 20
+      }
+    ]
+  },
+  "R": {
+    "svg_path": "M50,180 L50,20 M50,20 C145,20 145,100 50,100 M50,100 L155,180",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.9
+    },
+    "hint": "Draw a line up, make a bump on the right, then kick your leg down-right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.9,
+        "order": 0
+      },
+      {
+        "x": 0.25,
+        "y": 0.7,
+        "order": 1
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.3,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 4
+      },
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 5
+      },
+      {
+        "x": 0.448,
+        "y": 0.13,
+        "order": 6
+      },
+      {
+        "x": 0.567,
+        "y": 0.204,
+        "order": 7
+      },
+      {
+        "x": 0.606,
+        "y": 0.3,
+        "order": 8
+      },
+      {
+        "x": 0.567,
+        "y": 0.396,
+        "order": 9
+      },
+      {
+        "x": 0.448,
+        "y": 0.47,
+        "order": 10
+      },
+      {
+        "x": 0.25,
+        "y": 0.5,
+        "order": 11
+      },
+      {
+        "x": 0.381,
+        "y": 0.6,
+        "order": 12
+      },
+      {
+        "x": 0.512,
+        "y": 0.7,
+        "order": 13
+      },
+      {
+        "x": 0.644,
+        "y": 0.8,
+        "order": 14
+      },
+      {
+        "x": 0.775,
+        "y": 0.9,
+        "order": 15
+      }
+    ]
+  },
+  "S": {
+    "svg_path": "M148,45 C115,5 42,30 50,90 C58,145 148,150 148,190 C148,220 75,210 42,178",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.74,
+      "y": 0.22
+    },
+    "hint": "Start at the top right and curve left, then curve right at the bottom!",
+    "expected_shapes": {
+      "lines": false,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.74,
+        "y": 0.225,
+        "order": 0
+      },
+      {
+        "x": 0.622,
+        "y": 0.143,
+        "order": 1
+      },
+      {
+        "x": 0.485,
+        "y": 0.131,
+        "order": 2
+      },
+      {
+        "x": 0.358,
+        "y": 0.184,
+        "order": 3
+      },
+      {
+        "x": 0.27,
+        "y": 0.292,
+        "order": 4
+      },
+      {
+        "x": 0.25,
+        "y": 0.45,
+        "order": 5
+      },
+      {
+        "x": 0.316,
+        "y": 0.588,
+        "order": 6
+      },
+      {
+        "x": 0.44,
+        "y": 0.687,
+        "order": 7
+      },
+      {
+        "x": 0.579,
+        "y": 0.767,
+        "order": 8
+      },
+      {
+        "x": 0.693,
+        "y": 0.848,
+        "order": 9
+      },
+      {
+        "x": 0.74,
+        "y": 0.95,
+        "order": 10
+      },
+      {
+        "x": 0.397,
+        "y": 0.99,
+        "order": 11
+      },
+      {
+        "x": 0.21,
+        "y": 0.89,
+        "order": 12
+      }
+    ]
+  },
+  "T": {
+    "svg_path": "M30,20 L170,20 M100,20 L100,180",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.15,
+      "y": 0.1
+    },
+    "hint": "Draw a line all the way across the top, then go straight down the middle!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.15,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.3,
+        "y": 0.1,
+        "order": 1
+      },
+      {
+        "x": 0.45,
+        "y": 0.1,
+        "order": 2
+      },
+      {
+        "x": 0.5,
+        "y": 0.1,
+        "order": 3
+      },
+      {
+        "x": 0.65,
+        "y": 0.1,
+        "order": 4
+      },
+      {
+        "x": 0.8,
+        "y": 0.1,
+        "order": 5
+      },
+      {
+        "x": 0.85,
+        "y": 0.1,
+        "order": 6
+      },
+      {
+        "x": 0.5,
+        "y": 0.1,
+        "order": 7
+      },
+      {
+        "x": 0.5,
+        "y": 0.27,
+        "order": 8
+      },
+      {
+        "x": 0.5,
+        "y": 0.44,
+        "order": 9
+      },
+      {
+        "x": 0.5,
+        "y": 0.62,
+        "order": 10
+      },
+      {
+        "x": 0.5,
+        "y": 0.78,
+        "order": 11
+      },
+      {
+        "x": 0.5,
+        "y": 0.9,
+        "order": 12
+      }
+    ]
+  },
+  "U": {
+    "svg_path": "M50,20 L50,145 C50,195 150,195 150,145 L150,20",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.1
+    },
+    "hint": "Go down the left side, curve around the bottom, then go back up!",
+    "expected_shapes": {
+      "lines": false,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.25,
+        "y": 0.256,
+        "order": 1
+      },
+      {
+        "x": 0.25,
+        "y": 0.412,
+        "order": 2
+      },
+      {
+        "x": 0.25,
+        "y": 0.569,
+        "order": 3
+      },
+      {
+        "x": 0.25,
+        "y": 0.725,
+        "order": 4
+      },
+      {
+        "x": 0.302,
+        "y": 0.845,
+        "order": 5
+      },
+      {
+        "x": 0.426,
+        "y": 0.905,
+        "order": 6
+      },
+      {
+        "x": 0.574,
+        "y": 0.905,
+        "order": 7
+      },
+      {
+        "x": 0.698,
+        "y": 0.845,
+        "order": 8
+      },
+      {
+        "x": 0.75,
+        "y": 0.725,
+        "order": 9
+      },
+      {
+        "x": 0.75,
+        "y": 0.569,
+        "order": 10
+      },
+      {
+        "x": 0.75,
+        "y": 0.412,
+        "order": 11
+      },
+      {
+        "x": 0.75,
+        "y": 0.256,
+        "order": 12
+      },
+      {
+        "x": 0.75,
+        "y": 0.1,
+        "order": 13
+      }
+    ]
+  },
+  "V": {
+    "svg_path": "M40,20 L100,180 L160,20",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.2,
+      "y": 0.1
+    },
+    "hint": "Go diagonally down to the bottom middle, then diagonally back up!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.2,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.3,
+        "y": 0.28,
+        "order": 1
+      },
+      {
+        "x": 0.38,
+        "y": 0.46,
+        "order": 2
+      },
+      {
+        "x": 0.44,
+        "y": 0.64,
+        "order": 3
+      },
+      {
+        "x": 0.5,
+        "y": 0.8,
+        "order": 4
+      },
+      {
+        "x": 0.5,
+        "y": 0.9,
+        "order": 5
+      },
+      {
+        "x": 0.56,
+        "y": 0.8,
+        "order": 6
+      },
+      {
+        "x": 0.62,
+        "y": 0.64,
+        "order": 7
+      },
+      {
+        "x": 0.7,
+        "y": 0.46,
+        "order": 8
+      },
+      {
+        "x": 0.78,
+        "y": 0.28,
+        "order": 9
+      },
+      {
+        "x": 0.8,
+        "y": 0.1,
+        "order": 10
+      }
+    ]
+  },
+  "W": {
+    "svg_path": "M30,20 L65,180 L100,100 L135,180 L170,20",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.15,
+      "y": 0.1
+    },
+    "hint": "Go down to the left valley, up to the middle peak, down to the right valley, then back up!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.15,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.22,
+        "y": 0.35,
+        "order": 1
+      },
+      {
+        "x": 0.28,
+        "y": 0.6,
+        "order": 2
+      },
+      {
+        "x": 0.32,
+        "y": 0.9,
+        "order": 3
+      },
+      {
+        "x": 0.38,
+        "y": 0.68,
+        "order": 4
+      },
+      {
+        "x": 0.44,
+        "y": 0.52,
+        "order": 5
+      },
+      {
+        "x": 0.5,
+        "y": 0.5,
+        "order": 6
+      },
+      {
+        "x": 0.56,
+        "y": 0.52,
+        "order": 7
+      },
+      {
+        "x": 0.62,
+        "y": 0.68,
+        "order": 8
+      },
+      {
+        "x": 0.68,
+        "y": 0.9,
+        "order": 9
+      },
+      {
+        "x": 0.72,
+        "y": 0.6,
+        "order": 10
+      },
+      {
+        "x": 0.78,
+        "y": 0.35,
+        "order": 11
+      },
+      {
+        "x": 0.85,
+        "y": 0.1,
+        "order": 12
+      }
+    ]
+  },
+  "X": {
+    "svg_path": "M40,20 L160,180 M160,20 L40,180",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.2,
+      "y": 0.1
+    },
+    "hint": "Draw a diagonal line down-right, then cross it going down-left!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.2,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.3,
+        "y": 0.25,
+        "order": 1
+      },
+      {
+        "x": 0.4,
+        "y": 0.4,
+        "order": 2
+      },
+      {
+        "x": 0.5,
+        "y": 0.5,
+        "order": 3
+      },
+      {
+        "x": 0.6,
+        "y": 0.65,
+        "order": 4
+      },
+      {
+        "x": 0.7,
+        "y": 0.78,
+        "order": 5
+      },
+      {
+        "x": 0.8,
+        "y": 0.9,
+        "order": 6
+      },
+      {
+        "x": 0.8,
+        "y": 0.1,
+        "order": 7
+      },
+      {
+        "x": 0.7,
+        "y": 0.25,
+        "order": 8
+      },
+      {
+        "x": 0.6,
+        "y": 0.4,
+        "order": 9
+      },
+      {
+        "x": 0.5,
+        "y": 0.5,
+        "order": 10
+      },
+      {
+        "x": 0.4,
+        "y": 0.65,
+        "order": 11
+      },
+      {
+        "x": 0.3,
+        "y": 0.78,
+        "order": 12
+      },
+      {
+        "x": 0.2,
+        "y": 0.9,
+        "order": 13
+      }
+    ]
+  },
+  "Y": {
+    "svg_path": "M40,20 L100,100 L160,20 M100,100 L100,180",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.2,
+      "y": 0.1
+    },
+    "hint": "Draw a V shape to the middle, then go straight down!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.2,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.3,
+        "y": 0.23,
+        "order": 1
+      },
+      {
+        "x": 0.38,
+        "y": 0.35,
+        "order": 2
+      },
+      {
+        "x": 0.44,
+        "y": 0.44,
+        "order": 3
+      },
+      {
+        "x": 0.5,
+        "y": 0.5,
+        "order": 4
+      },
+      {
+        "x": 0.56,
+        "y": 0.44,
+        "order": 5
+      },
+      {
+        "x": 0.62,
+        "y": 0.35,
+        "order": 6
+      },
+      {
+        "x": 0.7,
+        "y": 0.23,
+        "order": 7
+      },
+      {
+        "x": 0.8,
+        "y": 0.1,
+        "order": 8
+      },
+      {
+        "x": 0.5,
+        "y": 0.5,
+        "order": 9
+      },
+      {
+        "x": 0.5,
+        "y": 0.63,
+        "order": 10
+      },
+      {
+        "x": 0.5,
+        "y": 0.76,
+        "order": 11
+      },
+      {
+        "x": 0.5,
+        "y": 0.9,
+        "order": 12
+      }
+    ]
+  },
+  "Z": {
+    "svg_path": "M40,20 L160,20 L40,180 L160,180",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.2,
+      "y": 0.1
+    },
+    "hint": "Draw the top line, then diagonally down to the left, then the bottom line!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.2,
+        "y": 0.1,
+        "order": 0
+      },
+      {
+        "x": 0.35,
+        "y": 0.1,
+        "order": 1
+      },
+      {
+        "x": 0.5,
+        "y": 0.1,
+        "order": 2
+      },
+      {
+        "x": 0.65,
+        "y": 0.1,
+        "order": 3
+      },
+      {
+        "x": 0.8,
+        "y": 0.1,
+        "order": 4
+      },
+      {
+        "x": 0.7,
+        "y": 0.28,
+        "order": 5
+      },
+      {
+        "x": 0.58,
+        "y": 0.46,
+        "order": 6
+      },
+      {
+        "x": 0.48,
+        "y": 0.54,
+        "order": 7
+      },
+      {
+        "x": 0.38,
+        "y": 0.62,
+        "order": 8
+      },
+      {
+        "x": 0.28,
+        "y": 0.78,
+        "order": 9
+      },
+      {
+        "x": 0.2,
+        "y": 0.9,
+        "order": 10
+      },
+      {
+        "x": 0.35,
+        "y": 0.9,
+        "order": 11
+      },
+      {
+        "x": 0.5,
+        "y": 0.9,
+        "order": 12
+      },
+      {
+        "x": 0.65,
+        "y": 0.9,
+        "order": 13
+      },
+      {
+        "x": 0.8,
+        "y": 0.9,
+        "order": 14
+      }
+    ]
+  },
+  "a": {
+    "svg_path": "M142,113 C142,68 58,68 58,113 C58,158 142,158 142,113 L142,158",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.71,
+      "y": 0.565
+    },
+    "hint": "Circle left then stroke down!",
+    "expected_shapes": {
+      "lines": false,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.71,
+        "y": 0.565,
+        "order": 0
+      },
+      {
+        "x": 0.666,
+        "y": 0.457,
+        "order": 1
+      },
+      {
+        "x": 0.562,
+        "y": 0.403,
+        "order": 2
+      },
+      {
+        "x": 0.438,
+        "y": 0.403,
+        "order": 3
+      },
+      {
+        "x": 0.334,
+        "y": 0.457,
+        "order": 4
+      },
+      {
+        "x": 0.29,
+        "y": 0.565,
+        "order": 5
+      },
+      {
+        "x": 0.334,
+        "y": 0.673,
+        "order": 6
+      },
+      {
+        "x": 0.438,
+        "y": 0.727,
+        "order": 7
+      },
+      {
+        "x": 0.562,
+        "y": 0.727,
+        "order": 8
+      },
+      {
+        "x": 0.666,
+        "y": 0.673,
+        "order": 9
+      },
+      {
+        "x": 0.71,
+        "y": 0.565,
+        "order": 10
+      },
+      {
+        "x": 0.71,
+        "y": 0.64,
+        "order": 11
+      },
+      {
+        "x": 0.71,
+        "y": 0.715,
+        "order": 12
+      },
+      {
+        "x": 0.71,
+        "y": 0.79,
+        "order": 13
+      }
+    ]
+  },
+  "b": {
+    "svg_path": "M62,22 L62,158 M62,76 C62,56 146,56 146,113 C146,170 62,170 62,158",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.31,
+      "y": 0.11
+    },
+    "hint": "Ascender down, bump right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.31,
+        "y": 0.11,
+        "order": 0
+      },
+      {
+        "x": 0.31,
+        "y": 0.246,
+        "order": 1
+      },
+      {
+        "x": 0.31,
+        "y": 0.382,
+        "order": 2
+      },
+      {
+        "x": 0.31,
+        "y": 0.518,
+        "order": 3
+      },
+      {
+        "x": 0.31,
+        "y": 0.654,
+        "order": 4
+      },
+      {
+        "x": 0.31,
+        "y": 0.79,
+        "order": 5
+      },
+      {
+        "x": 0.376,
+        "y": 0.327,
+        "order": 6
+      },
+      {
+        "x": 0.52,
+        "y": 0.328,
+        "order": 7
+      },
+      {
+        "x": 0.664,
+        "y": 0.402,
+        "order": 8
+      },
+      {
+        "x": 0.73,
+        "y": 0.565,
+        "order": 9
+      },
+      {
+        "x": 0.664,
+        "y": 0.729,
+        "order": 10
+      },
+      {
+        "x": 0.52,
+        "y": 0.807,
+        "order": 11
+      },
+      {
+        "x": 0.376,
+        "y": 0.82,
+        "order": 12
+      },
+      {
+        "x": 0.31,
+        "y": 0.79,
+        "order": 13
+      }
+    ]
+  },
+  "c": {
+    "svg_path": "M142,84 C142,68 58,68 58,113 C58,158 142,158 142,144",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.71,
+      "y": 0.42
+    },
+    "hint": "Open arc \u2014 start top-right, curve left!",
+    "expected_shapes": {
+      "lines": false,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.71,
+        "y": 0.42,
+        "order": 0
+      },
+      {
+        "x": 0.666,
+        "y": 0.383,
+        "order": 1
+      },
+      {
+        "x": 0.562,
+        "y": 0.372,
+        "order": 2
+      },
+      {
+        "x": 0.438,
+        "y": 0.394,
+        "order": 3
+      },
+      {
+        "x": 0.334,
+        "y": 0.456,
+        "order": 4
+      },
+      {
+        "x": 0.29,
+        "y": 0.565,
+        "order": 5
+      },
+      {
+        "x": 0.334,
+        "y": 0.674,
+        "order": 6
+      },
+      {
+        "x": 0.438,
+        "y": 0.737,
+        "order": 7
+      },
+      {
+        "x": 0.562,
+        "y": 0.76,
+        "order": 8
+      },
+      {
+        "x": 0.666,
+        "y": 0.752,
+        "order": 9
+      },
+      {
+        "x": 0.71,
+        "y": 0.72,
+        "order": 10
+      }
+    ]
+  },
+  "d": {
+    "svg_path": "M138,113 C138,68 58,68 58,113 C58,158 138,158 138,113 L138,22",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.69,
+      "y": 0.565
+    },
+    "hint": "Circle then ascender up!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.69,
+        "y": 0.565,
+        "order": 0
+      },
+      {
+        "x": 0.648,
+        "y": 0.457,
+        "order": 1
+      },
+      {
+        "x": 0.549,
+        "y": 0.403,
+        "order": 2
+      },
+      {
+        "x": 0.431,
+        "y": 0.403,
+        "order": 3
+      },
+      {
+        "x": 0.332,
+        "y": 0.457,
+        "order": 4
+      },
+      {
+        "x": 0.29,
+        "y": 0.565,
+        "order": 5
+      },
+      {
+        "x": 0.332,
+        "y": 0.673,
+        "order": 6
+      },
+      {
+        "x": 0.431,
+        "y": 0.727,
+        "order": 7
+      },
+      {
+        "x": 0.549,
+        "y": 0.727,
+        "order": 8
+      },
+      {
+        "x": 0.648,
+        "y": 0.673,
+        "order": 9
+      },
+      {
+        "x": 0.69,
+        "y": 0.565,
+        "order": 10
+      },
+      {
+        "x": 0.69,
+        "y": 0.474,
+        "order": 11
+      },
+      {
+        "x": 0.69,
+        "y": 0.383,
+        "order": 12
+      },
+      {
+        "x": 0.69,
+        "y": 0.292,
+        "order": 13
+      },
+      {
+        "x": 0.69,
+        "y": 0.201,
+        "order": 14
+      },
+      {
+        "x": 0.69,
+        "y": 0.11,
+        "order": 15
+      }
+    ]
+  },
+  "e": {
+    "svg_path": "M58,113 L142,113 C142,68 58,68 58,113 C58,158 132,158 144,140",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.29,
+      "y": 0.565
+    },
+    "hint": "Draw midline then loop around!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.29,
+        "y": 0.565,
+        "order": 0
+      },
+      {
+        "x": 0.43,
+        "y": 0.565,
+        "order": 1
+      },
+      {
+        "x": 0.57,
+        "y": 0.565,
+        "order": 2
+      },
+      {
+        "x": 0.71,
+        "y": 0.565,
+        "order": 3
+      },
+      {
+        "x": 0.644,
+        "y": 0.438,
+        "order": 4
+      },
+      {
+        "x": 0.5,
+        "y": 0.396,
+        "order": 5
+      },
+      {
+        "x": 0.356,
+        "y": 0.438,
+        "order": 6
+      },
+      {
+        "x": 0.29,
+        "y": 0.565,
+        "order": 7
+      },
+      {
+        "x": 0.349,
+        "y": 0.694,
+        "order": 8
+      },
+      {
+        "x": 0.482,
+        "y": 0.751,
+        "order": 9
+      },
+      {
+        "x": 0.627,
+        "y": 0.749,
+        "order": 10
+      },
+      {
+        "x": 0.72,
+        "y": 0.7,
+        "order": 11
+      }
+    ]
+  },
+  "f": {
+    "svg_path": "M132,38 C137,14 68,14 68,68 L68,158 M54,94 L128,94",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.66,
+      "y": 0.19
+    },
+    "hint": "Hook top, stem down, crossbar!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.66,
+        "y": 0.19,
+        "order": 0
+      },
+      {
+        "x": 0.621,
+        "y": 0.125,
+        "order": 1
+      },
+      {
+        "x": 0.509,
+        "y": 0.119,
+        "order": 2
+      },
+      {
+        "x": 0.394,
+        "y": 0.186,
+        "order": 3
+      },
+      {
+        "x": 0.34,
+        "y": 0.34,
+        "order": 4
+      },
+      {
+        "x": 0.34,
+        "y": 0.43,
+        "order": 5
+      },
+      {
+        "x": 0.34,
+        "y": 0.52,
+        "order": 6
+      },
+      {
+        "x": 0.34,
+        "y": 0.61,
+        "order": 7
+      },
+      {
+        "x": 0.34,
+        "y": 0.7,
+        "order": 8
+      },
+      {
+        "x": 0.34,
+        "y": 0.79,
+        "order": 9
+      },
+      {
+        "x": 0.27,
+        "y": 0.47,
+        "order": 10
+      },
+      {
+        "x": 0.393,
+        "y": 0.47,
+        "order": 11
+      },
+      {
+        "x": 0.517,
+        "y": 0.47,
+        "order": 12
+      },
+      {
+        "x": 0.64,
+        "y": 0.47,
+        "order": 13
+      }
+    ]
+  },
+  "g": {
+    "svg_path": "M138,110 C138,68 58,68 58,110 C58,158 138,158 138,110 L138,178 C138,200 66,200 66,178",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.69,
+      "y": 0.55
+    },
+    "hint": "Circle right, then hook descender!",
+    "expected_shapes": {
+      "lines": false,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.69,
+        "y": 0.55,
+        "order": 0
+      },
+      {
+        "x": 0.627,
+        "y": 0.432,
+        "order": 1
+      },
+      {
+        "x": 0.49,
+        "y": 0.393,
+        "order": 2
+      },
+      {
+        "x": 0.352,
+        "y": 0.432,
+        "order": 3
+      },
+      {
+        "x": 0.29,
+        "y": 0.55,
+        "order": 4
+      },
+      {
+        "x": 0.352,
+        "y": 0.685,
+        "order": 5
+      },
+      {
+        "x": 0.49,
+        "y": 0.73,
+        "order": 6
+      },
+      {
+        "x": 0.627,
+        "y": 0.685,
+        "order": 7
+      },
+      {
+        "x": 0.69,
+        "y": 0.55,
+        "order": 8
+      },
+      {
+        "x": 0.69,
+        "y": 0.663,
+        "order": 9
+      },
+      {
+        "x": 0.69,
+        "y": 0.777,
+        "order": 10
+      },
+      {
+        "x": 0.69,
+        "y": 0.89,
+        "order": 11
+      },
+      {
+        "x": 0.634,
+        "y": 0.952,
+        "order": 12
+      },
+      {
+        "x": 0.51,
+        "y": 0.973,
+        "order": 13
+      },
+      {
+        "x": 0.386,
+        "y": 0.952,
+        "order": 14
+      },
+      {
+        "x": 0.33,
+        "y": 0.89,
+        "order": 15
+      }
+    ]
+  },
+  "h": {
+    "svg_path": "M62,22 L62,158 M62,82 C62,58 142,58 142,109 L142,158",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.31,
+      "y": 0.11
+    },
+    "hint": "Ascender down, arch right, stem down!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.31,
+        "y": 0.11,
+        "order": 0
+      },
+      {
+        "x": 0.31,
+        "y": 0.246,
+        "order": 1
+      },
+      {
+        "x": 0.31,
+        "y": 0.382,
+        "order": 2
+      },
+      {
+        "x": 0.31,
+        "y": 0.518,
+        "order": 3
+      },
+      {
+        "x": 0.31,
+        "y": 0.654,
+        "order": 4
+      },
+      {
+        "x": 0.31,
+        "y": 0.79,
+        "order": 5
+      },
+      {
+        "x": 0.372,
+        "y": 0.345,
+        "order": 6
+      },
+      {
+        "x": 0.51,
+        "y": 0.337,
+        "order": 7
+      },
+      {
+        "x": 0.647,
+        "y": 0.399,
+        "order": 8
+      },
+      {
+        "x": 0.71,
+        "y": 0.545,
+        "order": 9
+      },
+      {
+        "x": 0.71,
+        "y": 0.627,
+        "order": 10
+      },
+      {
+        "x": 0.71,
+        "y": 0.708,
+        "order": 11
+      },
+      {
+        "x": 0.71,
+        "y": 0.79,
+        "order": 12
+      }
+    ]
+  },
+  "i": {
+    "svg_path": "M100,48 L100,56 M100,72 L100,158",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.5,
+      "y": 0.24
+    },
+    "hint": "Dot first, then straight down!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.5,
+        "y": 0.24,
+        "order": 0
+      },
+      {
+        "x": 0.5,
+        "y": 0.26,
+        "order": 1
+      },
+      {
+        "x": 0.5,
+        "y": 0.28,
+        "order": 2
+      },
+      {
+        "x": 0.5,
+        "y": 0.36,
+        "order": 3
+      },
+      {
+        "x": 0.5,
+        "y": 0.446,
+        "order": 4
+      },
+      {
+        "x": 0.5,
+        "y": 0.532,
+        "order": 5
+      },
+      {
+        "x": 0.5,
+        "y": 0.618,
+        "order": 6
+      },
+      {
+        "x": 0.5,
+        "y": 0.704,
+        "order": 7
+      },
+      {
+        "x": 0.5,
+        "y": 0.79,
+        "order": 8
+      }
+    ]
+  },
+  "j": {
+    "svg_path": "M115,48 L115,56 M115,72 L115,178 C115,198 62,198 62,178",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.575,
+      "y": 0.24
+    },
+    "hint": "Dot, stem, hook left at bottom!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.575,
+        "y": 0.24,
+        "order": 0
+      },
+      {
+        "x": 0.575,
+        "y": 0.26,
+        "order": 1
+      },
+      {
+        "x": 0.575,
+        "y": 0.28,
+        "order": 2
+      },
+      {
+        "x": 0.575,
+        "y": 0.36,
+        "order": 3
+      },
+      {
+        "x": 0.575,
+        "y": 0.466,
+        "order": 4
+      },
+      {
+        "x": 0.575,
+        "y": 0.572,
+        "order": 5
+      },
+      {
+        "x": 0.575,
+        "y": 0.678,
+        "order": 6
+      },
+      {
+        "x": 0.575,
+        "y": 0.784,
+        "order": 7
+      },
+      {
+        "x": 0.575,
+        "y": 0.89,
+        "order": 8
+      },
+      {
+        "x": 0.506,
+        "y": 0.957,
+        "order": 9
+      },
+      {
+        "x": 0.379,
+        "y": 0.957,
+        "order": 10
+      },
+      {
+        "x": 0.31,
+        "y": 0.89,
+        "order": 11
+      }
+    ]
+  },
+  "k": {
+    "svg_path": "M62,22 L62,158 M142,68 L62,113 L142,158",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.31,
+      "y": 0.11
+    },
+    "hint": "Stem down, kick two legs!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.31,
+        "y": 0.11,
+        "order": 0
+      },
+      {
+        "x": 0.31,
+        "y": 0.246,
+        "order": 1
+      },
+      {
+        "x": 0.31,
+        "y": 0.382,
+        "order": 2
+      },
+      {
+        "x": 0.31,
+        "y": 0.518,
+        "order": 3
+      },
+      {
+        "x": 0.31,
+        "y": 0.654,
+        "order": 4
+      },
+      {
+        "x": 0.31,
+        "y": 0.79,
+        "order": 5
+      },
+      {
+        "x": 0.577,
+        "y": 0.415,
+        "order": 6
+      },
+      {
+        "x": 0.443,
+        "y": 0.49,
+        "order": 7
+      },
+      {
+        "x": 0.31,
+        "y": 0.565,
+        "order": 8
+      },
+      {
+        "x": 0.443,
+        "y": 0.64,
+        "order": 9
+      },
+      {
+        "x": 0.577,
+        "y": 0.715,
+        "order": 10
+      },
+      {
+        "x": 0.71,
+        "y": 0.79,
+        "order": 11
+      }
+    ]
+  },
+  "l": {
+    "svg_path": "M100,22 L100,152 C100,162 116,164 116,158",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.5,
+      "y": 0.11
+    },
+    "hint": "Single stroke straight down!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.5,
+        "y": 0.11,
+        "order": 0
+      },
+      {
+        "x": 0.5,
+        "y": 0.203,
+        "order": 1
+      },
+      {
+        "x": 0.5,
+        "y": 0.296,
+        "order": 2
+      },
+      {
+        "x": 0.5,
+        "y": 0.389,
+        "order": 3
+      },
+      {
+        "x": 0.5,
+        "y": 0.481,
+        "order": 4
+      },
+      {
+        "x": 0.5,
+        "y": 0.574,
+        "order": 5
+      },
+      {
+        "x": 0.5,
+        "y": 0.667,
+        "order": 6
+      },
+      {
+        "x": 0.5,
+        "y": 0.76,
+        "order": 7
+      },
+      {
+        "x": 0.521,
+        "y": 0.797,
+        "order": 8
+      },
+      {
+        "x": 0.559,
+        "y": 0.807,
+        "order": 9
+      },
+      {
+        "x": 0.58,
+        "y": 0.79,
+        "order": 10
+      }
+    ]
+  },
+  "m": {
+    "svg_path": "M58,158 L58,78 C58,58 90,58 90,78 L90,158 M90,78 C90,58 142,58 142,78 L142,158",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.29,
+      "y": 0.79
+    },
+    "hint": "Up, over two humps, down!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.29,
+        "y": 0.79,
+        "order": 0
+      },
+      {
+        "x": 0.29,
+        "y": 0.657,
+        "order": 1
+      },
+      {
+        "x": 0.29,
+        "y": 0.523,
+        "order": 2
+      },
+      {
+        "x": 0.29,
+        "y": 0.39,
+        "order": 3
+      },
+      {
+        "x": 0.331,
+        "y": 0.323,
+        "order": 4
+      },
+      {
+        "x": 0.409,
+        "y": 0.323,
+        "order": 5
+      },
+      {
+        "x": 0.45,
+        "y": 0.39,
+        "order": 6
+      },
+      {
+        "x": 0.45,
+        "y": 0.523,
+        "order": 7
+      },
+      {
+        "x": 0.45,
+        "y": 0.657,
+        "order": 8
+      },
+      {
+        "x": 0.45,
+        "y": 0.79,
+        "order": 9
+      },
+      {
+        "x": 0.45,
+        "y": 0.59,
+        "order": 10
+      },
+      {
+        "x": 0.45,
+        "y": 0.39,
+        "order": 11
+      },
+      {
+        "x": 0.517,
+        "y": 0.323,
+        "order": 12
+      },
+      {
+        "x": 0.643,
+        "y": 0.323,
+        "order": 13
+      },
+      {
+        "x": 0.71,
+        "y": 0.39,
+        "order": 14
+      },
+      {
+        "x": 0.71,
+        "y": 0.523,
+        "order": 15
+      },
+      {
+        "x": 0.71,
+        "y": 0.657,
+        "order": 16
+      },
+      {
+        "x": 0.71,
+        "y": 0.79,
+        "order": 17
+      }
+    ]
+  },
+  "n": {
+    "svg_path": "M58,158 L58,78 C58,56 142,56 142,78 L142,158",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.29,
+      "y": 0.79
+    },
+    "hint": "Up, arch right, stem down!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.29,
+        "y": 0.79,
+        "order": 0
+      },
+      {
+        "x": 0.29,
+        "y": 0.69,
+        "order": 1
+      },
+      {
+        "x": 0.29,
+        "y": 0.59,
+        "order": 2
+      },
+      {
+        "x": 0.29,
+        "y": 0.49,
+        "order": 3
+      },
+      {
+        "x": 0.29,
+        "y": 0.39,
+        "order": 4
+      },
+      {
+        "x": 0.334,
+        "y": 0.337,
+        "order": 5
+      },
+      {
+        "x": 0.438,
+        "y": 0.311,
+        "order": 6
+      },
+      {
+        "x": 0.562,
+        "y": 0.311,
+        "order": 7
+      },
+      {
+        "x": 0.666,
+        "y": 0.337,
+        "order": 8
+      },
+      {
+        "x": 0.71,
+        "y": 0.39,
+        "order": 9
+      },
+      {
+        "x": 0.71,
+        "y": 0.49,
+        "order": 10
+      },
+      {
+        "x": 0.71,
+        "y": 0.59,
+        "order": 11
+      },
+      {
+        "x": 0.71,
+        "y": 0.69,
+        "order": 12
+      },
+      {
+        "x": 0.71,
+        "y": 0.79,
+        "order": 13
+      }
+    ]
+  },
+  "o": {
+    "svg_path": "M100,68 C152,68 152,158 100,158 C48,158 48,68 100,68",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.5,
+      "y": 0.34
+    },
+    "hint": "Full oval \u2014 start at top!",
+    "expected_shapes": {
+      "lines": false,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.5,
+        "y": 0.34,
+        "order": 0
+      },
+      {
+        "x": 0.608,
+        "y": 0.373,
+        "order": 1
+      },
+      {
+        "x": 0.673,
+        "y": 0.457,
+        "order": 2
+      },
+      {
+        "x": 0.695,
+        "y": 0.565,
+        "order": 3
+      },
+      {
+        "x": 0.673,
+        "y": 0.673,
+        "order": 4
+      },
+      {
+        "x": 0.608,
+        "y": 0.757,
+        "order": 5
+      },
+      {
+        "x": 0.5,
+        "y": 0.79,
+        "order": 6
+      },
+      {
+        "x": 0.392,
+        "y": 0.757,
+        "order": 7
+      },
+      {
+        "x": 0.327,
+        "y": 0.673,
+        "order": 8
+      },
+      {
+        "x": 0.305,
+        "y": 0.565,
+        "order": 9
+      },
+      {
+        "x": 0.327,
+        "y": 0.457,
+        "order": 10
+      },
+      {
+        "x": 0.392,
+        "y": 0.373,
+        "order": 11
+      },
+      {
+        "x": 0.5,
+        "y": 0.34,
+        "order": 12
+      }
+    ]
+  },
+  "p": {
+    "svg_path": "M62,72 L62,192 M62,72 C62,52 146,52 146,113 C146,170 62,170 62,158",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.31,
+      "y": 0.36
+    },
+    "hint": "Stem down past baseline, bump right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.31,
+        "y": 0.36,
+        "order": 0
+      },
+      {
+        "x": 0.31,
+        "y": 0.46,
+        "order": 1
+      },
+      {
+        "x": 0.31,
+        "y": 0.56,
+        "order": 2
+      },
+      {
+        "x": 0.31,
+        "y": 0.66,
+        "order": 3
+      },
+      {
+        "x": 0.31,
+        "y": 0.76,
+        "order": 4
+      },
+      {
+        "x": 0.31,
+        "y": 0.86,
+        "order": 5
+      },
+      {
+        "x": 0.31,
+        "y": 0.96,
+        "order": 6
+      },
+      {
+        "x": 0.376,
+        "y": 0.307,
+        "order": 7
+      },
+      {
+        "x": 0.52,
+        "y": 0.311,
+        "order": 8
+      },
+      {
+        "x": 0.664,
+        "y": 0.39,
+        "order": 9
+      },
+      {
+        "x": 0.73,
+        "y": 0.565,
+        "order": 10
+      },
+      {
+        "x": 0.664,
+        "y": 0.729,
+        "order": 11
+      },
+      {
+        "x": 0.52,
+        "y": 0.807,
+        "order": 12
+      },
+      {
+        "x": 0.376,
+        "y": 0.82,
+        "order": 13
+      },
+      {
+        "x": 0.31,
+        "y": 0.79,
+        "order": 14
+      }
+    ]
+  },
+  "q": {
+    "svg_path": "M100,68 C48,68 48,158 100,158 C152,158 152,68 100,68 M138,113 L138,192",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.5,
+      "y": 0.34
+    },
+    "hint": "Circle left, then descend right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.5,
+        "y": 0.34,
+        "order": 0
+      },
+      {
+        "x": 0.392,
+        "y": 0.373,
+        "order": 1
+      },
+      {
+        "x": 0.327,
+        "y": 0.457,
+        "order": 2
+      },
+      {
+        "x": 0.305,
+        "y": 0.565,
+        "order": 3
+      },
+      {
+        "x": 0.327,
+        "y": 0.673,
+        "order": 4
+      },
+      {
+        "x": 0.392,
+        "y": 0.757,
+        "order": 5
+      },
+      {
+        "x": 0.5,
+        "y": 0.79,
+        "order": 6
+      },
+      {
+        "x": 0.608,
+        "y": 0.757,
+        "order": 7
+      },
+      {
+        "x": 0.673,
+        "y": 0.673,
+        "order": 8
+      },
+      {
+        "x": 0.695,
+        "y": 0.565,
+        "order": 9
+      },
+      {
+        "x": 0.673,
+        "y": 0.457,
+        "order": 10
+      },
+      {
+        "x": 0.608,
+        "y": 0.373,
+        "order": 11
+      },
+      {
+        "x": 0.5,
+        "y": 0.34,
+        "order": 12
+      },
+      {
+        "x": 0.69,
+        "y": 0.664,
+        "order": 13
+      },
+      {
+        "x": 0.69,
+        "y": 0.762,
+        "order": 14
+      },
+      {
+        "x": 0.69,
+        "y": 0.861,
+        "order": 15
+      },
+      {
+        "x": 0.69,
+        "y": 0.96,
+        "order": 16
+      }
+    ]
+  },
+  "r": {
+    "svg_path": "M62,158 L62,90 C62,58 148,50 148,74",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.31,
+      "y": 0.79
+    },
+    "hint": "Up then arch partway to the right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.31,
+        "y": 0.79,
+        "order": 0
+      },
+      {
+        "x": 0.31,
+        "y": 0.705,
+        "order": 1
+      },
+      {
+        "x": 0.31,
+        "y": 0.62,
+        "order": 2
+      },
+      {
+        "x": 0.31,
+        "y": 0.535,
+        "order": 3
+      },
+      {
+        "x": 0.31,
+        "y": 0.45,
+        "order": 4
+      },
+      {
+        "x": 0.377,
+        "y": 0.353,
+        "order": 5
+      },
+      {
+        "x": 0.525,
+        "y": 0.305,
+        "order": 6
+      },
+      {
+        "x": 0.673,
+        "y": 0.309,
+        "order": 7
+      },
+      {
+        "x": 0.74,
+        "y": 0.37,
+        "order": 8
+      }
+    ]
+  },
+  "s": {
+    "svg_path": "M142,78 C142,54 58,54 58,113 C58,172 142,172 142,152",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.71,
+      "y": 0.39
+    },
+    "hint": "S-curve \u2014 two loops!",
+    "expected_shapes": {
+      "lines": false,
+      "circles": true
+    },
+    "waypoints": [
+      {
+        "x": 0.71,
+        "y": 0.39,
+        "order": 0
+      },
+      {
+        "x": 0.644,
+        "y": 0.325,
+        "order": 1
+      },
+      {
+        "x": 0.5,
+        "y": 0.322,
+        "order": 2
+      },
+      {
+        "x": 0.356,
+        "y": 0.396,
+        "order": 3
+      },
+      {
+        "x": 0.29,
+        "y": 0.565,
+        "order": 4
+      },
+      {
+        "x": 0.356,
+        "y": 0.734,
+        "order": 5
+      },
+      {
+        "x": 0.5,
+        "y": 0.811,
+        "order": 6
+      },
+      {
+        "x": 0.644,
+        "y": 0.813,
+        "order": 7
+      },
+      {
+        "x": 0.71,
+        "y": 0.76,
+        "order": 8
+      }
+    ]
+  },
+  "t": {
+    "svg_path": "M100,28 L100,152 C100,162 116,164 120,156 M62,80 L138,80",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.5,
+      "y": 0.14
+    },
+    "hint": "Stem down, add crossbar!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.5,
+        "y": 0.14,
+        "order": 0
+      },
+      {
+        "x": 0.5,
+        "y": 0.243,
+        "order": 1
+      },
+      {
+        "x": 0.5,
+        "y": 0.347,
+        "order": 2
+      },
+      {
+        "x": 0.5,
+        "y": 0.45,
+        "order": 3
+      },
+      {
+        "x": 0.5,
+        "y": 0.553,
+        "order": 4
+      },
+      {
+        "x": 0.5,
+        "y": 0.657,
+        "order": 5
+      },
+      {
+        "x": 0.5,
+        "y": 0.76,
+        "order": 6
+      },
+      {
+        "x": 0.521,
+        "y": 0.796,
+        "order": 7
+      },
+      {
+        "x": 0.565,
+        "y": 0.804,
+        "order": 8
+      },
+      {
+        "x": 0.6,
+        "y": 0.78,
+        "order": 9
+      },
+      {
+        "x": 0.31,
+        "y": 0.4,
+        "order": 10
+      },
+      {
+        "x": 0.437,
+        "y": 0.4,
+        "order": 11
+      },
+      {
+        "x": 0.563,
+        "y": 0.4,
+        "order": 12
+      },
+      {
+        "x": 0.69,
+        "y": 0.4,
+        "order": 13
+      }
+    ]
+  },
+  "u": {
+    "svg_path": "M58,68 L58,144 C58,174 142,174 142,144 L142,68",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.29,
+      "y": 0.34
+    },
+    "hint": "Down, curve under, up!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.29,
+        "y": 0.34,
+        "order": 0
+      },
+      {
+        "x": 0.29,
+        "y": 0.435,
+        "order": 1
+      },
+      {
+        "x": 0.29,
+        "y": 0.53,
+        "order": 2
+      },
+      {
+        "x": 0.29,
+        "y": 0.625,
+        "order": 3
+      },
+      {
+        "x": 0.29,
+        "y": 0.72,
+        "order": 4
+      },
+      {
+        "x": 0.356,
+        "y": 0.804,
+        "order": 5
+      },
+      {
+        "x": 0.5,
+        "y": 0.833,
+        "order": 6
+      },
+      {
+        "x": 0.644,
+        "y": 0.804,
+        "order": 7
+      },
+      {
+        "x": 0.71,
+        "y": 0.72,
+        "order": 8
+      },
+      {
+        "x": 0.71,
+        "y": 0.625,
+        "order": 9
+      },
+      {
+        "x": 0.71,
+        "y": 0.53,
+        "order": 10
+      },
+      {
+        "x": 0.71,
+        "y": 0.435,
+        "order": 11
+      },
+      {
+        "x": 0.71,
+        "y": 0.34,
+        "order": 12
+      }
+    ]
+  },
+  "v": {
+    "svg_path": "M58,68 L100,158 L142,68",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.29,
+      "y": 0.34
+    },
+    "hint": "Diagonal down-right, then up-right!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.29,
+        "y": 0.34,
+        "order": 0
+      },
+      {
+        "x": 0.343,
+        "y": 0.453,
+        "order": 1
+      },
+      {
+        "x": 0.395,
+        "y": 0.565,
+        "order": 2
+      },
+      {
+        "x": 0.448,
+        "y": 0.677,
+        "order": 3
+      },
+      {
+        "x": 0.5,
+        "y": 0.79,
+        "order": 4
+      },
+      {
+        "x": 0.552,
+        "y": 0.677,
+        "order": 5
+      },
+      {
+        "x": 0.605,
+        "y": 0.565,
+        "order": 6
+      },
+      {
+        "x": 0.657,
+        "y": 0.453,
+        "order": 7
+      },
+      {
+        "x": 0.71,
+        "y": 0.34,
+        "order": 8
+      }
+    ]
+  },
+  "w": {
+    "svg_path": "M50,68 L72,158 L100,98 L128,158 L150,68",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.25,
+      "y": 0.34
+    },
+    "hint": "Two V shapes connected!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.25,
+        "y": 0.34,
+        "order": 0
+      },
+      {
+        "x": 0.287,
+        "y": 0.49,
+        "order": 1
+      },
+      {
+        "x": 0.323,
+        "y": 0.64,
+        "order": 2
+      },
+      {
+        "x": 0.36,
+        "y": 0.79,
+        "order": 3
+      },
+      {
+        "x": 0.43,
+        "y": 0.64,
+        "order": 4
+      },
+      {
+        "x": 0.5,
+        "y": 0.49,
+        "order": 5
+      },
+      {
+        "x": 0.57,
+        "y": 0.64,
+        "order": 6
+      },
+      {
+        "x": 0.64,
+        "y": 0.79,
+        "order": 7
+      },
+      {
+        "x": 0.677,
+        "y": 0.64,
+        "order": 8
+      },
+      {
+        "x": 0.713,
+        "y": 0.49,
+        "order": 9
+      },
+      {
+        "x": 0.75,
+        "y": 0.34,
+        "order": 10
+      }
+    ]
+  },
+  "x": {
+    "svg_path": "M58,68 L142,158 M142,68 L58,158",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.29,
+      "y": 0.34
+    },
+    "hint": "Two crossing diagonals!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.29,
+        "y": 0.34,
+        "order": 0
+      },
+      {
+        "x": 0.374,
+        "y": 0.43,
+        "order": 1
+      },
+      {
+        "x": 0.458,
+        "y": 0.52,
+        "order": 2
+      },
+      {
+        "x": 0.542,
+        "y": 0.61,
+        "order": 3
+      },
+      {
+        "x": 0.626,
+        "y": 0.7,
+        "order": 4
+      },
+      {
+        "x": 0.71,
+        "y": 0.79,
+        "order": 5
+      },
+      {
+        "x": 0.626,
+        "y": 0.43,
+        "order": 6
+      },
+      {
+        "x": 0.542,
+        "y": 0.52,
+        "order": 7
+      },
+      {
+        "x": 0.458,
+        "y": 0.61,
+        "order": 8
+      },
+      {
+        "x": 0.374,
+        "y": 0.7,
+        "order": 9
+      },
+      {
+        "x": 0.29,
+        "y": 0.79,
+        "order": 10
+      }
+    ]
+  },
+  "y": {
+    "svg_path": "M58,68 L100,126 M142,68 L100,126 L80,178 C80,196 128,196 128,178",
+    "stroke_count": 2,
+    "start_point": {
+      "x": 0.29,
+      "y": 0.34
+    },
+    "hint": "Two diagonals to center, then hook down!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.29,
+        "y": 0.34,
+        "order": 0
+      },
+      {
+        "x": 0.343,
+        "y": 0.412,
+        "order": 1
+      },
+      {
+        "x": 0.395,
+        "y": 0.485,
+        "order": 2
+      },
+      {
+        "x": 0.448,
+        "y": 0.557,
+        "order": 3
+      },
+      {
+        "x": 0.5,
+        "y": 0.63,
+        "order": 4
+      },
+      {
+        "x": 0.657,
+        "y": 0.412,
+        "order": 5
+      },
+      {
+        "x": 0.605,
+        "y": 0.485,
+        "order": 6
+      },
+      {
+        "x": 0.552,
+        "y": 0.557,
+        "order": 7
+      },
+      {
+        "x": 0.5,
+        "y": 0.63,
+        "order": 8
+      },
+      {
+        "x": 0.467,
+        "y": 0.717,
+        "order": 9
+      },
+      {
+        "x": 0.433,
+        "y": 0.803,
+        "order": 10
+      },
+      {
+        "x": 0.4,
+        "y": 0.89,
+        "order": 11
+      },
+      {
+        "x": 0.462,
+        "y": 0.95,
+        "order": 12
+      },
+      {
+        "x": 0.578,
+        "y": 0.95,
+        "order": 13
+      },
+      {
+        "x": 0.64,
+        "y": 0.89,
+        "order": 14
+      }
+    ]
+  },
+  "z": {
+    "svg_path": "M58,68 L142,68 L58,158 L142,158",
+    "stroke_count": 1,
+    "start_point": {
+      "x": 0.29,
+      "y": 0.34
+    },
+    "hint": "Top line, diagonal, bottom line!",
+    "expected_shapes": {
+      "lines": true,
+      "circles": false
+    },
+    "waypoints": [
+      {
+        "x": 0.29,
+        "y": 0.34,
+        "order": 0
+      },
+      {
+        "x": 0.43,
+        "y": 0.34,
+        "order": 1
+      },
+      {
+        "x": 0.57,
+        "y": 0.34,
+        "order": 2
+      },
+      {
+        "x": 0.71,
+        "y": 0.34,
+        "order": 3
+      },
+      {
+        "x": 0.626,
+        "y": 0.43,
+        "order": 4
+      },
+      {
+        "x": 0.542,
+        "y": 0.52,
+        "order": 5
+      },
+      {
+        "x": 0.458,
+        "y": 0.61,
+        "order": 6
+      },
+      {
+        "x": 0.374,
+        "y": 0.7,
+        "order": 7
+      },
+      {
+        "x": 0.29,
+        "y": 0.79,
+        "order": 8
+      },
+      {
+        "x": 0.43,
+        "y": 0.79,
+        "order": 9
+      },
+      {
+        "x": 0.57,
+        "y": 0.79,
+        "order": 10
+      },
+      {
+        "x": 0.71,
+        "y": 0.79,
+        "order": 11
+      }
+    ]
+  }
+}
