@@ -306,10 +306,11 @@ const FilterEngine = (() => {
   /**
    * Hough Line Detection (module catalog §3.1)
    * Pipeline: Canny edge map → (ρ,θ) accumulator voting → peak detection → draw lines
-   * Output: bright cyan lines on transparent background
+   * Matches cv2.HoughLinesP + cv2.line(img,(x1,y1),(x2,y2),(255,255,0),1)
+   * Output: yellow lines on transparent background — original video shows through
    */
   function _applyHoughLines(imageData, w, h) {
-    // Step 1: Get Canny edge map
+    // Step 1: Get Canny edge map (same as cv2.Canny(gray, 50, 255))
     const gray    = _toGray(imageData.data, w, h);
     const blurred = _gaussBlur5x5(gray, w, h);
     const gx = _convolve3x3(blurred, w, h, SOBEL_X);
@@ -324,14 +325,15 @@ const FilterEngine = (() => {
     const nms   = _cannyNMS(mag, gx, gy, w, h);
     const edges = _hysteresis(nms, w, h, 0.15 * maxMag, 0.05 * maxMag);
 
-    // Step 2: Hough accumulator in (ρ, θ) space
+    // Step 2: Hough accumulator in (ρ, θ) parameter space
+    // ρ = x·cos(θ) + y·sin(θ)  — each edge pixel votes for all possible lines
     const thetaSteps = 180;
     const dTheta     = Math.PI / thetaSteps;
     const diagonal   = Math.sqrt(w * w + h * h) | 0;
     const rhoMax     = diagonal;
-    const rhoSize    = 2 * rhoMax + 1;  // ρ ranges from -diagonal to +diagonal
+    const rhoSize    = 2 * rhoMax + 1;
 
-    // Pre-compute cos/sin table
+    // Pre-compute cos/sin lookup table
     const cosT = new Float32Array(thetaSteps);
     const sinT = new Float32Array(thetaSteps);
     for (let t = 0; t < thetaSteps; t++) {
@@ -339,13 +341,13 @@ const FilterEngine = (() => {
       sinT[t] = Math.sin(t * dTheta);
     }
 
-    // Accumulator
+    // Accumulator — voting in (ρ, θ) space
     const accum = new Uint16Array(rhoSize * thetaSteps);
 
-    // Vote: for each edge pixel, vote for every (ρ, θ)
+    // Vote: for each edge pixel, cast a vote for every (ρ, θ) line through it
     for (let y = 0; y < h; y++) {
       for (let x = 0; x < w; x++) {
-        if (edges[y * w + x] !== 2) continue;  // only strong edges
+        if (edges[y * w + x] !== 2) continue;
         for (let t = 0; t < thetaSteps; t++) {
           const rho = Math.round(x * cosT[t] + y * sinT[t]) + rhoMax;
           accum[rho * thetaSteps + t]++;
@@ -353,20 +355,21 @@ const FilterEngine = (() => {
       }
     }
 
-    // Step 3: Find peaks — threshold relative to max votes
+    // Step 3: Find peaks — use a low threshold like cv2.HoughLinesP(..., 30, ...)
+    // to detect many lines, matching the dense yellow lines in the reference image
     let maxVotes = 0;
     for (let i = 0; i < accum.length; i++) {
       if (accum[i] > maxVotes) maxVotes = accum[i];
     }
-    const voteThreshold = Math.max(30, maxVotes * 0.35);
+    const voteThreshold = Math.max(20, maxVotes * 0.20);
 
-    // Collect line parameters from peaks
+    // Collect line parameters from accumulator peaks (NMS in 3×3 neighborhood)
     const lines = [];
     for (let r = 0; r < rhoSize; r++) {
       for (let t = 0; t < thetaSteps; t++) {
-        if (accum[r * thetaSteps + t] < voteThreshold) continue;
-        // Local max check in 5×5 neighborhood
         const val = accum[r * thetaSteps + t];
+        if (val < voteThreshold) continue;
+        // Local max check — only keep peaks, not plateaus
         let isMax = true;
         for (let dr = -2; dr <= 2 && isMax; dr++) {
           for (let dt = -2; dt <= 2 && isMax; dt++) {
@@ -378,80 +381,61 @@ const FilterEngine = (() => {
           }
         }
         if (isMax) {
-          lines.push({ rho: r - rhoMax, theta: t * dTheta });
+          lines.push({ rho: r - rhoMax, theta: t * dTheta, votes: val });
         }
       }
     }
 
-    // Step 4: Draw lines on output (limit to top 20 to avoid clutter)
-    lines.sort((a, b) => {
-      const aIdx = (a.rho + rhoMax) * thetaSteps + Math.round(a.theta / dTheta);
-      const bIdx = (b.rho + rhoMax) * thetaSteps + Math.round(b.theta / dTheta);
-      return (accum[bIdx] || 0) - (accum[aIdx] || 0);
-    });
-    const topLines = lines.slice(0, 20);
+    // Step 4: Sort by votes descending, keep top 100 (dense like the reference)
+    lines.sort((a, b) => b.votes - a.votes);
+    const topLines = lines.slice(0, 100);
 
+    // Output buffer — fully transparent so the live video shows through underneath
     const out = new Uint8ClampedArray(w * h * 4);
 
-    // First draw faint Canny edges as context
-    for (let i = 0; i < w * h; i++) {
-      if (edges[i] === 2) {
-        out[i * 4]     = 100;
-        out[i * 4 + 1] = 100;
-        out[i * 4 + 2] = 120;
-        out[i * 4 + 3] = 80;
-      }
-    }
-
-    // Draw each detected line using Bresenham-style plotting
+    // Draw each detected line in yellow (255, 255, 0) — matching
+    // cv2.line(img, (x1,y1), (x2,y2), (255,255,0), 1) from the Python code
     for (const line of topLines) {
       const cosA = Math.cos(line.theta);
       const sinA = Math.sin(line.theta);
 
-      // Compute two endpoints of the line clipped to the image
+      // Compute two endpoints of the infinite line, clipped to image bounds
       let x1, y1, x2, y2;
       if (Math.abs(sinA) > 0.001) {
-        // Line is not vertical — compute y at x=0 and x=w-1
         x1 = 0;
         y1 = Math.round((line.rho - x1 * cosA) / sinA);
         x2 = w - 1;
         y2 = Math.round((line.rho - x2 * cosA) / sinA);
       } else {
-        // Nearly vertical line
         x1 = Math.round(line.rho / cosA);
         y1 = 0;
         x2 = x1;
         y2 = h - 1;
       }
 
-      // Bresenham line rasterization
-      _drawLineOnBuffer(out, w, h, x1, y1, x2, y2, [0, 255, 255, 220]);
+      // Yellow line — RGB(255, 255, 0), fully opaque
+      _drawLineOnBuffer(out, w, h, x1, y1, x2, y2, [255, 255, 0, 255]);
     }
 
     return new ImageData(out, w, h);
   }
 
-  /** Bresenham line drawing into a pixel buffer */
+  /** Bresenham line drawing into a pixel buffer — 1px thin lines matching cv2.line(..., 1) */
   function _drawLineOnBuffer(buf, w, h, x0, y0, x1, y1, rgba) {
     const dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
     const dy = -Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
     let err = dx + dy;
     let x = x0, y = y0;
-    const maxSteps = (w + h) * 3;  // safety limit
+    const maxSteps = (w + h) * 3;
     let steps = 0;
     while (steps++ < maxSteps) {
-      // Draw a 2px thick point for visibility
-      for (let oy = -1; oy <= 1; oy++) {
-        for (let ox = -1; ox <= 1; ox++) {
-          const px = x + ox, py = y + oy;
-          if (px >= 0 && px < w && py >= 0 && py < h) {
-            const idx = (py * w + px) * 4;
-            buf[idx]     = rgba[0];
-            buf[idx + 1] = rgba[1];
-            buf[idx + 2] = rgba[2];
-            buf[idx + 3] = rgba[3];
-          }
-        }
+      // Single pixel — thin 1px line like cv2.line thickness=1
+      if (x >= 0 && x < w && y >= 0 && y < h) {
+        const idx = (y * w + x) * 4;
+        buf[idx]     = rgba[0];
+        buf[idx + 1] = rgba[1];
+        buf[idx + 2] = rgba[2];
+        buf[idx + 3] = rgba[3];
       }
       if (x === x1 && y === y1) break;
       const e2 = 2 * err;
