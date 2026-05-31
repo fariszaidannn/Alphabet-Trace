@@ -303,6 +303,328 @@ const FilterEngine = (() => {
     return new ImageData(out, w, h);
   }
 
+  /**
+   * Hough Line Detection (module catalog §3.1)
+   * Pipeline: Canny edge map → (ρ,θ) accumulator voting → peak detection → draw lines
+   * Output: bright cyan lines on transparent background
+   */
+  function _applyHoughLines(imageData, w, h) {
+    // Step 1: Get Canny edge map
+    const gray    = _toGray(imageData.data, w, h);
+    const blurred = _gaussBlur5x5(gray, w, h);
+    const gx = _convolve3x3(blurred, w, h, SOBEL_X);
+    const gy = _convolve3x3(blurred, w, h, SOBEL_Y);
+
+    const mag = new Float32Array(w * h);
+    let maxMag = 0;
+    for (let i = 0; i < w * h; i++) {
+      mag[i] = Math.sqrt(gx[i] * gx[i] + gy[i] * gy[i]);
+      if (mag[i] > maxMag) maxMag = mag[i];
+    }
+    const nms   = _cannyNMS(mag, gx, gy, w, h);
+    const edges = _hysteresis(nms, w, h, 0.15 * maxMag, 0.05 * maxMag);
+
+    // Step 2: Hough accumulator in (ρ, θ) space
+    const thetaSteps = 180;
+    const dTheta     = Math.PI / thetaSteps;
+    const diagonal   = Math.sqrt(w * w + h * h) | 0;
+    const rhoMax     = diagonal;
+    const rhoSize    = 2 * rhoMax + 1;  // ρ ranges from -diagonal to +diagonal
+
+    // Pre-compute cos/sin table
+    const cosT = new Float32Array(thetaSteps);
+    const sinT = new Float32Array(thetaSteps);
+    for (let t = 0; t < thetaSteps; t++) {
+      cosT[t] = Math.cos(t * dTheta);
+      sinT[t] = Math.sin(t * dTheta);
+    }
+
+    // Accumulator
+    const accum = new Uint16Array(rhoSize * thetaSteps);
+
+    // Vote: for each edge pixel, vote for every (ρ, θ)
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        if (edges[y * w + x] !== 2) continue;  // only strong edges
+        for (let t = 0; t < thetaSteps; t++) {
+          const rho = Math.round(x * cosT[t] + y * sinT[t]) + rhoMax;
+          accum[rho * thetaSteps + t]++;
+        }
+      }
+    }
+
+    // Step 3: Find peaks — threshold relative to max votes
+    let maxVotes = 0;
+    for (let i = 0; i < accum.length; i++) {
+      if (accum[i] > maxVotes) maxVotes = accum[i];
+    }
+    const voteThreshold = Math.max(30, maxVotes * 0.35);
+
+    // Collect line parameters from peaks
+    const lines = [];
+    for (let r = 0; r < rhoSize; r++) {
+      for (let t = 0; t < thetaSteps; t++) {
+        if (accum[r * thetaSteps + t] < voteThreshold) continue;
+        // Local max check in 5×5 neighborhood
+        const val = accum[r * thetaSteps + t];
+        let isMax = true;
+        for (let dr = -2; dr <= 2 && isMax; dr++) {
+          for (let dt = -2; dt <= 2 && isMax; dt++) {
+            if (dr === 0 && dt === 0) continue;
+            const nr = r + dr, nt = t + dt;
+            if (nr >= 0 && nr < rhoSize && nt >= 0 && nt < thetaSteps) {
+              if (accum[nr * thetaSteps + nt] > val) isMax = false;
+            }
+          }
+        }
+        if (isMax) {
+          lines.push({ rho: r - rhoMax, theta: t * dTheta });
+        }
+      }
+    }
+
+    // Step 4: Draw lines on output (limit to top 20 to avoid clutter)
+    lines.sort((a, b) => {
+      const aIdx = (a.rho + rhoMax) * thetaSteps + Math.round(a.theta / dTheta);
+      const bIdx = (b.rho + rhoMax) * thetaSteps + Math.round(b.theta / dTheta);
+      return (accum[bIdx] || 0) - (accum[aIdx] || 0);
+    });
+    const topLines = lines.slice(0, 20);
+
+    const out = new Uint8ClampedArray(w * h * 4);
+
+    // First draw faint Canny edges as context
+    for (let i = 0; i < w * h; i++) {
+      if (edges[i] === 2) {
+        out[i * 4]     = 100;
+        out[i * 4 + 1] = 100;
+        out[i * 4 + 2] = 120;
+        out[i * 4 + 3] = 80;
+      }
+    }
+
+    // Draw each detected line using Bresenham-style plotting
+    for (const line of topLines) {
+      const cosA = Math.cos(line.theta);
+      const sinA = Math.sin(line.theta);
+
+      // Compute two endpoints of the line clipped to the image
+      let x1, y1, x2, y2;
+      if (Math.abs(sinA) > 0.001) {
+        // Line is not vertical — compute y at x=0 and x=w-1
+        x1 = 0;
+        y1 = Math.round((line.rho - x1 * cosA) / sinA);
+        x2 = w - 1;
+        y2 = Math.round((line.rho - x2 * cosA) / sinA);
+      } else {
+        // Nearly vertical line
+        x1 = Math.round(line.rho / cosA);
+        y1 = 0;
+        x2 = x1;
+        y2 = h - 1;
+      }
+
+      // Bresenham line rasterization
+      _drawLineOnBuffer(out, w, h, x1, y1, x2, y2, [0, 255, 255, 220]);
+    }
+
+    return new ImageData(out, w, h);
+  }
+
+  /** Bresenham line drawing into a pixel buffer */
+  function _drawLineOnBuffer(buf, w, h, x0, y0, x1, y1, rgba) {
+    const dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+    const dy = -Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+    let err = dx + dy;
+    let x = x0, y = y0;
+    const maxSteps = (w + h) * 3;  // safety limit
+    let steps = 0;
+    while (steps++ < maxSteps) {
+      // Draw a 2px thick point for visibility
+      for (let oy = -1; oy <= 1; oy++) {
+        for (let ox = -1; ox <= 1; ox++) {
+          const px = x + ox, py = y + oy;
+          if (px >= 0 && px < w && py >= 0 && py < h) {
+            const idx = (py * w + px) * 4;
+            buf[idx]     = rgba[0];
+            buf[idx + 1] = rgba[1];
+            buf[idx + 2] = rgba[2];
+            buf[idx + 3] = rgba[3];
+          }
+        }
+      }
+      if (x === x1 && y === y1) break;
+      const e2 = 2 * err;
+      if (e2 >= dy) { err += dy; x += sx; }
+      if (e2 <= dx) { err += dx; y += sy; }
+    }
+  }
+
+  /**
+   * Hough Circle Detection (module catalog §3.2)
+   * Pipeline: Canny edge map → gradient-directed voting in (cx,cy,r) space → peak detection → draw circles
+   * Output: magenta/pink circles on transparent background
+   */
+  function _applyHoughCircles(imageData, w, h) {
+    // Step 1: Get Canny edge map + gradients
+    const gray    = _toGray(imageData.data, w, h);
+    const blurred = _gaussBlur5x5(gray, w, h);
+    const gx = _convolve3x3(blurred, w, h, SOBEL_X);
+    const gy = _convolve3x3(blurred, w, h, SOBEL_Y);
+
+    const mag = new Float32Array(w * h);
+    let maxMag = 0;
+    for (let i = 0; i < w * h; i++) {
+      mag[i] = Math.sqrt(gx[i] * gx[i] + gy[i] * gy[i]);
+      if (mag[i] > maxMag) maxMag = mag[i];
+    }
+    const nms   = _cannyNMS(mag, gx, gy, w, h);
+    const edges = _hysteresis(nms, w, h, 0.15 * maxMag, 0.05 * maxMag);
+
+    // Step 2: Hough circle accumulator
+    // Radius range: 8 to min(w,h)/3 pixels — reasonable for half-res
+    const minR = 8;
+    const maxR = Math.min(w, h) / 3 | 0;
+    const rSteps = maxR - minR + 1;
+    if (rSteps <= 0) return _applyCanny(imageData, w, h); // fallback
+
+    // 3D accumulator: (cx, cy, r) — flattened
+    // To save memory, use a 2D accumulator for centers and track best radius separately
+    const accum = new Uint16Array(w * h);
+    const bestR = new Uint8Array(w * h);  // best radius at each center
+
+    // Gradient-directed voting: only vote along gradient direction
+    // This massively reduces computation vs brute-force
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        if (edges[y * w + x] !== 2) continue;
+        const i = y * w + x;
+        const m = mag[i];
+        if (m < 5) continue;
+
+        const gdx = gx[i] / m;  // normalized gradient direction
+        const gdy = gy[i] / m;
+
+        // Vote along gradient direction for each candidate radius
+        for (let r = minR; r <= maxR; r += 2) {  // step by 2 for speed
+          // Two candidate centers: along +gradient and -gradient
+          for (const sign of [1, -1]) {
+            const cx = Math.round(x + sign * gdx * r);
+            const cy = Math.round(y + sign * gdy * r);
+            if (cx >= 0 && cx < w && cy >= 0 && cy < h) {
+              const ci = cy * w + cx;
+              accum[ci]++;
+              if (accum[ci] > accum[bestR[ci]] || bestR[ci] === 0) {
+                bestR[ci] = r;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Step 3: Find circle peaks
+    let maxVotes = 0;
+    for (let i = 0; i < accum.length; i++) {
+      if (accum[i] > maxVotes) maxVotes = accum[i];
+    }
+    const circleThreshold = Math.max(15, maxVotes * 0.4);
+
+    const circles = [];
+    for (let cy = 5; cy < h - 5; cy++) {
+      for (let cx = 5; cx < w - 5; cx++) {
+        const ci = cy * w + cx;
+        if (accum[ci] < circleThreshold) continue;
+
+        // Non-maximum suppression in 7×7 neighborhood
+        let isMax = true;
+        for (let dy = -3; dy <= 3 && isMax; dy++) {
+          for (let dx = -3; dx <= 3 && isMax; dx++) {
+            if (dy === 0 && dx === 0) continue;
+            const ni = (cy + dy) * w + (cx + dx);
+            if (ni >= 0 && ni < w * h && accum[ni] > accum[ci]) isMax = false;
+          }
+        }
+        if (isMax) {
+          circles.push({ cx, cy, r: bestR[ci], votes: accum[ci] });
+        }
+      }
+    }
+
+    // Sort by votes and limit to top 15
+    circles.sort((a, b) => b.votes - a.votes);
+    const topCircles = circles.slice(0, 15);
+
+    // Step 4: Draw results
+    const out = new Uint8ClampedArray(w * h * 4);
+
+    // Faint Canny edges as context
+    for (let i = 0; i < w * h; i++) {
+      if (edges[i] === 2) {
+        out[i * 4]     = 100;
+        out[i * 4 + 1] = 100;
+        out[i * 4 + 2] = 120;
+        out[i * 4 + 3] = 80;
+      }
+    }
+
+    // Draw detected circles (circumference + center dot)
+    for (const c of topCircles) {
+      // Draw circumference using midpoint circle algorithm
+      _drawCircleOnBuffer(out, w, h, c.cx, c.cy, c.r, [255, 0, 200, 220]);
+      // Draw center point (3×3 bright dot)
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          const px = c.cx + dx, py = c.cy + dy;
+          if (px >= 0 && px < w && py >= 0 && py < h) {
+            const idx = (py * w + px) * 4;
+            out[idx]     = 0;
+            out[idx + 1] = 255;
+            out[idx + 2] = 180;
+            out[idx + 3] = 255;
+          }
+        }
+      }
+    }
+
+    return new ImageData(out, w, h);
+  }
+
+  /** Midpoint circle algorithm — draws a circle outline into a pixel buffer */
+  function _drawCircleOnBuffer(buf, w, h, cx, cy, r, rgba) {
+    let x = r, y = 0, d = 1 - r;
+    while (x >= y) {
+      // Plot 8 symmetric points with 2px thickness
+      const pts = [
+        [cx + x, cy + y], [cx - x, cy + y],
+        [cx + x, cy - y], [cx - x, cy - y],
+        [cx + y, cy + x], [cx - y, cy + x],
+        [cx + y, cy - x], [cx - y, cy - x]
+      ];
+      for (const [px, py] of pts) {
+        for (let oy = -1; oy <= 0; oy++) {
+          for (let ox = -1; ox <= 0; ox++) {
+            const fx = px + ox, fy = py + oy;
+            if (fx >= 0 && fx < w && fy >= 0 && fy < h) {
+              const idx = (fy * w + fx) * 4;
+              buf[idx]     = rgba[0];
+              buf[idx + 1] = rgba[1];
+              buf[idx + 2] = rgba[2];
+              buf[idx + 3] = rgba[3];
+            }
+          }
+        }
+      }
+      y++;
+      if (d < 0) {
+        d += 2 * y + 1;
+      } else {
+        x--;
+        d += 2 * (y - x) + 1;
+      }
+    }
+  }
+
   // ── Render loop ────────────────────────────────────────────
 
   function _runLoop() {
@@ -343,6 +665,10 @@ const FilterEngine = (() => {
           result = _applyHarris(imgData, procW, procH);
         } else if (_mode === 'canny') {
           result = _applyCanny(imgData, procW, procH);
+        } else if (_mode === 'hough-lines') {
+          result = _applyHoughLines(imgData, procW, procH);
+        } else if (_mode === 'hough-circles') {
+          result = _applyHoughCircles(imgData, procW, procH);
         }
 
         if (result) {
