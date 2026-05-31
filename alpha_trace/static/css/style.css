@@ -149,14 +149,14 @@ button:active { transform: scale(0.95); }
   z-index: 0;
 }
 
-/* ── Filter canvas — background layer ────────── */
+/* ── Filter canvas — transparent overlay layer ─── */
 #filter-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   transform: scaleX(-1);
-  opacity: 0.55;
+  opacity: 1;          /* transparent pixels let video through — no forced opacity */
   z-index: 1;
   pointer-events: none;
 }
