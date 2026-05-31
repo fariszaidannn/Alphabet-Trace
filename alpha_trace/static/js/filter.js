@@ -22,6 +22,9 @@ const FilterEngine = (() => {
   // Harris sensitivity parameter (module catalog §2.1)
   const HARRIS_K = 0.04;
 
+  // Separable 5×5 Gaussian kernel weights (σ≈1) for Canny pre-blur
+  const GAUSS5 = [1 / 17, 4 / 17, 7 / 17, 4 / 17, 1 / 17];
+
   // Performance: process at half resolution then scale up
   const PROC_SCALE = 0.5;
 
@@ -84,6 +87,82 @@ const FilterEngine = (() => {
       }
     }
     return out;
+  }
+
+  /** Separable 5×5 Gaussian blur for noise reduction before gradient computation */
+  function _gaussBlur5x5(gray, w, h) {
+    const temp = new Float32Array(w * h);
+    const out  = new Float32Array(w * h);
+
+    for (let y = 0; y < h; y++) {
+      for (let x = 2; x < w - 2; x++) {
+        let s = 0;
+        for (let k = -2; k <= 2; k++) s += gray[y * w + (x + k)] * GAUSS5[k + 2];
+        temp[y * w + x] = s;
+      }
+    }
+    for (let y = 2; y < h - 2; y++) {
+      for (let x = 2; x < w - 2; x++) {
+        let s = 0;
+        for (let k = -2; k <= 2; k++) s += temp[(y + k) * w + x] * GAUSS5[k + 2];
+        out[y * w + x] = s;
+      }
+    }
+    return out;
+  }
+
+  /**
+   * Canny non-maximum suppression — thins edges to 1-pixel width by suppressing
+   * pixels that are not local maxima along the gradient direction.
+   */
+  function _cannyNMS(mag, gx, gy, w, h) {
+    const out = new Float32Array(w * h);
+    for (let y = 1; y < h - 1; y++) {
+      for (let x = 1; x < w - 1; x++) {
+        const i = y * w + x;
+        const m = mag[i];
+        if (m === 0) continue;
+
+        const a = (Math.atan2(gy[i], gx[i]) * 180 / Math.PI + 180) % 180;
+        let p, q;
+        if (a < 22.5 || a >= 157.5) {
+          p = mag[i - 1];                        q = mag[i + 1];
+        } else if (a < 67.5) {
+          p = mag[(y - 1) * w + (x + 1)];        q = mag[(y + 1) * w + (x - 1)];
+        } else if (a < 112.5) {
+          p = mag[(y - 1) * w + x];              q = mag[(y + 1) * w + x];
+        } else {
+          p = mag[(y - 1) * w + (x - 1)];        q = mag[(y + 1) * w + (x + 1)];
+        }
+
+        out[i] = (m >= p && m >= q) ? m : 0;
+      }
+    }
+    return out;
+  }
+
+  /** Hysteresis thresholding — keeps weak edges only if connected to a strong edge */
+  function _hysteresis(nms, w, h, highT, lowT) {
+    const STRONG = 2, WEAK = 1;
+    const edge = new Uint8Array(w * h);
+    for (let i = 0; i < w * h; i++) {
+      if (nms[i] >= highT)      edge[i] = STRONG;
+      else if (nms[i] >= lowT)  edge[i] = WEAK;
+    }
+    for (let y = 1; y < h - 1; y++) {
+      for (let x = 1; x < w - 1; x++) {
+        if (edge[y * w + x] !== WEAK) continue;
+        const row0 = (y - 1) * w, row1 = y * w, row2 = (y + 1) * w;
+        if (
+          edge[row0 + x - 1] === STRONG || edge[row0 + x] === STRONG || edge[row0 + x + 1] === STRONG ||
+          edge[row1 + x - 1] === STRONG ||                               edge[row1 + x + 1] === STRONG ||
+          edge[row2 + x - 1] === STRONG || edge[row2 + x] === STRONG || edge[row2 + x + 1] === STRONG
+        ) {
+          edge[y * w + x] = STRONG;
+        }
+      }
+    }
+    return edge;
   }
 
   // ── Filter implementations ─────────────────────────────────
@@ -168,21 +247,64 @@ const FilterEngine = (() => {
 
     for (let y = 2; y < h - 2; y++) {
       for (let x = 2; x < w - 2; x++) {
-        if (response[y * w + x] > threshold) {
-          // Draw a ~3px filled dot (magenta)
-          for (let dy = -1; dy <= 1; dy++) {
-            for (let dx = -1; dx <= 1; dx++) {
-              const idx = ((y + dy) * w + (x + dx)) * 4;
-              out[idx]     = 255;  // R
-              out[idx + 1] = 0;    // G
-              out[idx + 2] = 200;  // B (magenta)
-              out[idx + 3] = 220;  // A
-            }
+        const r = response[y * w + x];
+        if (r <= threshold) continue;
+        // Non-maximum suppression: keep only local maxima in 3×3 neighborhood
+        let isMax = true;
+        for (let dy = -1; dy <= 1 && isMax; dy++) {
+          for (let dx = -1; dx <= 1 && isMax; dx++) {
+            if (dy === 0 && dx === 0) continue;
+            if (response[(y + dy) * w + (x + dx)] > r) isMax = false;
+          }
+        }
+        if (!isMax) continue;
+        // Draw a ~3px filled dot (magenta)
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            const idx = ((y + dy) * w + (x + dx)) * 4;
+            out[idx]     = 255;  // R
+            out[idx + 1] = 0;    // G
+            out[idx + 2] = 200;  // B (magenta)
+            out[idx + 3] = 220;  // A
           }
         }
       }
     }
 
+    return new ImageData(out, w, h);
+  }
+
+  /**
+   * Canny edge detection (module catalog §1.4)
+   * Pipeline: Gaussian blur → Sobel → gradient-direction NMS → hysteresis
+   * Output: golden-yellow 1-pixel edges on transparent background
+   */
+  function _applyCanny(imageData, w, h) {
+    const gray    = _toGray(imageData.data, w, h);
+    const blurred = _gaussBlur5x5(gray, w, h);
+
+    const gx = _convolve3x3(blurred, w, h, SOBEL_X);
+    const gy = _convolve3x3(blurred, w, h, SOBEL_Y);
+
+    const mag = new Float32Array(w * h);
+    let maxMag = 0;
+    for (let i = 0; i < w * h; i++) {
+      mag[i] = Math.sqrt(gx[i] * gx[i] + gy[i] * gy[i]);
+      if (mag[i] > maxMag) maxMag = mag[i];
+    }
+
+    const nms   = _cannyNMS(mag, gx, gy, w, h);
+    const edges = _hysteresis(nms, w, h, 0.15 * maxMag, 0.05 * maxMag);
+
+    const out = new Uint8ClampedArray(w * h * 4);
+    for (let i = 0; i < w * h; i++) {
+      if (edges[i] === 2) {
+        out[i * 4]     = 255;  // R — golden yellow
+        out[i * 4 + 1] = 215;  // G
+        out[i * 4 + 2] = 50;   // B
+        out[i * 4 + 3] = 230;  // A
+      }
+    }
     return new ImageData(out, w, h);
   }
 
@@ -224,6 +346,8 @@ const FilterEngine = (() => {
           result = _applySobel(imgData, procW, procH);
         } else if (_mode === 'harris') {
           result = _applyHarris(imgData, procW, procH);
+        } else if (_mode === 'canny') {
+          result = _applyCanny(imgData, procW, procH);
         }
 
         if (result) {

@@ -20,7 +20,7 @@ AlphaTrace lets you practice writing letters A–Z (uppercase and lowercase) by 
 - **Shape analysis** — after each letter, OpenCV scores how well your strokes matched the expected lines and curves
 - **Celebration feedback** — confetti, sound, and animations for each completed letter
 - **Procedural audio** — all sounds synthesized via Web Audio API, no audio files
-- **Image filters** — switch between Normal, Sobel edge detection, and Harris corner detection views
+- **Image filters** — switch between Normal, Sobel edge detection, Harris corner detection (with NMS), and Canny edge detection views
 - **Progress tracking** — completion state persisted per session, star counter for each case
 - **Zero frontend dependencies** — plain ES6, HTML5 Canvas, no framework or build step
 
