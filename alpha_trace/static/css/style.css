@@ -382,11 +382,28 @@ button:active { transform: scale(0.95); }
   border: 1px solid #2a4f7a;
   border-top: none;
   border-radius: 0 0 12px 12px;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: 172px;
   list-style: none;
   z-index: 50;
   box-shadow: 0 8px 24px rgba(0,0,0,0.5);
   animation: dropdown-open 0.15s ease forwards;
+  scrollbar-width: thin;
+  scrollbar-color: #2a4f7a #1d3557;
+}
+.filter-menu::-webkit-scrollbar {
+  width: 6px;
+}
+.filter-menu::-webkit-scrollbar-track {
+  background: #1d3557;
+  border-radius: 0 0 12px 0;
+}
+.filter-menu::-webkit-scrollbar-thumb {
+  background: #2a4f7a;
+  border-radius: 3px;
+}
+.filter-menu::-webkit-scrollbar-thumb:hover {
+  background: #e9c46a;
 }
 
 @keyframes dropdown-open {
