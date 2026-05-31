@@ -224,10 +224,10 @@ const FilterEngine = (() => {
       ixy[i] = ix[i] * iy[i];
     }
 
-    // Gaussian smoothing of structure tensor (box blur approximation)
-    const sxx = _boxBlur3x3(ixx, w, h);
-    const syy = _boxBlur3x3(iyy, w, h);
-    const sxy = _boxBlur3x3(ixy, w, h);
+    // 5×5 Gaussian smoothing of structure tensor (better angular precision than box blur)
+    const sxx = _gaussBlur5x5(ixx, w, h);
+    const syy = _gaussBlur5x5(iyy, w, h);
+    const sxy = _gaussBlur5x5(ixy, w, h);
 
     // Harris response: R = det(M) - k * trace(M)²
     const response = new Float32Array(w * h);
@@ -239,35 +239,30 @@ const FilterEngine = (() => {
       if (response[i] > maxR) maxR = response[i];
     }
 
-    // Threshold at 1% of max response (same as module catalog)
-    const threshold = 0.01 * maxR;
+    // Threshold at 0.8% of max response (slightly more sensitive for detail)
+    const threshold = 0.008 * maxR;
 
     const out = new Uint8ClampedArray(w * h * 4);
-    // all transparent by default
 
-    for (let y = 2; y < h - 2; y++) {
-      for (let x = 2; x < w - 2; x++) {
+    for (let y = 3; y < h - 3; y++) {
+      for (let x = 3; x < w - 3; x++) {
         const r = response[y * w + x];
         if (r <= threshold) continue;
-        // Non-maximum suppression: keep only local maxima in 3×3 neighborhood
+        // Non-maximum suppression: 5×5 neighborhood — eliminates duplicate detections
         let isMax = true;
-        for (let dy = -1; dy <= 1 && isMax; dy++) {
-          for (let dx = -1; dx <= 1 && isMax; dx++) {
+        for (let dy = -2; dy <= 2 && isMax; dy++) {
+          for (let dx = -2; dx <= 2 && isMax; dx++) {
             if (dy === 0 && dx === 0) continue;
             if (response[(y + dy) * w + (x + dx)] > r) isMax = false;
           }
         }
         if (!isMax) continue;
-        // Draw a ~3px filled dot (magenta)
-        for (let dy = -1; dy <= 1; dy++) {
-          for (let dx = -1; dx <= 1; dx++) {
-            const idx = ((y + dy) * w + (x + dx)) * 4;
-            out[idx]     = 255;  // R
-            out[idx + 1] = 0;    // G
-            out[idx + 2] = 200;  // B (magenta)
-            out[idx + 3] = 220;  // A
-          }
-        }
+        // Single-pixel marker — precise corner point, smaller than before
+        const idx = (y * w + x) * 4;
+        out[idx]     = 255;  // R
+        out[idx + 1] = 0;    // G
+        out[idx + 2] = 200;  // B (magenta)
+        out[idx + 3] = 255;  // A
       }
     }
 
