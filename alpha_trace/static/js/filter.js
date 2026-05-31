@@ -17,11 +17,20 @@ const FilterEngine = (() => {
   let _dst = null;
   let _harris = null;
 
+  // Track allocated Mat dimensions so we can re-create when canvas resizes
+  let _matW = 0;
+  let _matH = 0;
+
   let _loadingCv = false;
+  let _cvLoadTimer = null;  // timeout handle for CDN failure detection
 
   function _init(filterCanvasEl) {
     _canvas = filterCanvasEl;
     _ctx = filterCanvasEl.getContext('2d', { willReadFrequently: true });
+  }
+
+  function _getLabel() {
+    return document.getElementById('filter-label');
   }
 
   function _loadOpenCv() {
@@ -29,13 +38,25 @@ const FilterEngine = (() => {
     _loadingCv = true;
     console.log('[Filter] Dynamically loading OpenCV.js (approx. 8MB)...');
 
-    const label = document.getElementById('filter-label');
-    if (label) label.textContent = 'Loading...';
+    const label = _getLabel();
+    if (label) label.textContent = 'Loading…';
 
     const script = document.createElement('script');
-    script.src = 'https://docs.opencv.org/4.10.0/opencv.js';
+    // Use jsDelivr mirror — more reliable than docs.opencv.org
+    script.src = 'https://cdn.jsdelivr.net/npm/opencv.js@1.2.1/opencv.js';
     script.async = true;
     script.type = 'text/javascript';
+
+    // Bug fix #3: 15-second timeout in case CDN is unreliable
+    _cvLoadTimer = setTimeout(() => {
+      console.error('[Filter] OpenCV.js load timed out after 15s.');
+      _loadingCv = false;
+      script.remove();
+      const lbl = _getLabel();
+      if (lbl) lbl.textContent = 'Unavailable';
+      // Revert to Normal so user isn't stuck
+      setMode('normal');
+    }, 15000);
 
     script.onload = () => {
       const checkCv = setInterval(() => {
@@ -47,32 +68,58 @@ const FilterEngine = (() => {
     };
 
     script.onerror = (err) => {
+      clearTimeout(_cvLoadTimer);
+      _cvLoadTimer = null;
       console.error('[Filter] Failed to load OpenCV.js:', err);
       _loadingCv = false;
-      if (label) label.textContent = 'Error';
+      const lbl = _getLabel();
+      if (lbl) lbl.textContent = 'Error';
     };
 
     document.body.appendChild(script);
   }
 
   function _onOpenCvReady() {
+    clearTimeout(_cvLoadTimer);
+    _cvLoadTimer = null;
     console.log('[Filter] OpenCV.js ready ✓');
     _cvReady = true;
     _loadingCv = false;
 
     // Restore dropdown label
-    const label = document.getElementById('filter-label');
-    const activeOpt = document.querySelector('.filter-option.active span');
+    const label = _getLabel();
+    const activeOpt = document.querySelector('.filter-option.active span:not([data-icon])');
     if (label && activeOpt) {
       label.textContent = activeOpt.textContent;
     }
 
-    _src = new cv.Mat(480, 640, cv.CV_8UC4);
-    _gray = new cv.Mat();
-    _dst = new cv.Mat();
+    // Allocate Mats at actual canvas dimensions (Bug fix #2)
+    _allocateMats();
+
+    // Bug fix #1: only start loop here, not prematurely in setMode
+    if (_mode !== 'normal') _runLoop();
+  }
+
+  // Bug fix #2: allocate/re-allocate Mats at real canvas size
+  function _allocateMats() {
+    const w = _canvas ? _canvas.width  : 640;
+    const h = _canvas ? _canvas.height : 480;
+
+    if (_matW === w && _matH === h) return; // already correct size
+
+    // Free old Mats if they exist
+    if (_src)    { _src.delete();    _src    = null; }
+    if (_gray)   { _gray.delete();   _gray   = null; }
+    if (_dst)    { _dst.delete();    _dst    = null; }
+    if (_harris) { _harris.delete(); _harris = null; }
+
+    _src    = new cv.Mat(h, w, cv.CV_8UC4);
+    _gray   = new cv.Mat();
+    _dst    = new cv.Mat();
     _harris = new cv.Mat();
 
-    if (_mode !== 'normal') _runLoop();
+    _matW = w;
+    _matH = h;
   }
 
   function setMode(mode) {
@@ -82,12 +129,26 @@ const FilterEngine = (() => {
     if (mode === 'normal') {
       stop();
       clearOverlay();
-    } else {
-      if (!_cvReady) {
-        _loadOpenCv();
+
+      // Bug fix #5: reset loading state + label when reverting to Normal
+      if (_loadingCv) {
+        _loadingCv = false;
+        clearTimeout(_cvLoadTimer);
+        _cvLoadTimer = null;
+        const label = _getLabel();
+        if (label) label.textContent = 'Filter';
       }
-      if (oldMode === 'normal') _runLoop();
+      return;
     }
+
+    if (!_cvReady) {
+      _loadOpenCv();
+      // Bug fix #1: do NOT call _runLoop here — wait for _onOpenCvReady
+      return;
+    }
+
+    // cv is ready: start loop only when actually switching away from normal
+    if (oldMode === 'normal' || _rafId === null) _runLoop();
   }
 
   function getMode() { return _mode; }
@@ -104,49 +165,57 @@ const FilterEngine = (() => {
         _rafId = null;
         return;
       }
-      
+
       _rafId = requestAnimationFrame(loop);
       if (!_cvReady) return;
 
       const video = Camera.getVideoElement();
       if (!video || video.readyState < 2) return;
 
+      // Bug fix #2: re-allocate Mats if canvas size changed
+      _allocateMats();
+
+      const w = _canvas.width;
+      const h = _canvas.height;
+
       try {
         // 1. Draw video frame to filter-canvas to get pixel access
-        _ctx.drawImage(video, 0, 0, _canvas.width, _canvas.height);
-        
+        _ctx.drawImage(video, 0, 0, w, h);
+
         // 2. Load pixels into OpenCV
-        const imgData = _ctx.getImageData(0, 0, 640, 480);
+        const imgData = _ctx.getImageData(0, 0, w, h);
         _src.data.set(imgData.data);
         cv.cvtColor(_src, _gray, cv.COLOR_RGBA2GRAY);
 
         if (_mode === 'sobel') {
-          // X-derivative, Y-derivative, combine
-          let gradX = new cv.Mat();
-          let gradY = new cv.Mat();
-          cv.Sobel(_gray, gradX, cv.CV_8U, 1, 0, 3);
-          cv.Sobel(_gray, gradY, cv.CV_8U, 0, 1, 3);
-          cv.addWeighted(gradX, 0.5, gradY, 0.5, 0, _dst);
-          
-          // Show edges on the canvas
-          cv.imshow(_canvas, _dst);
-          
-          gradX.delete(); gradY.delete();
-        } 
+          // Bug fix #4: guarantee Mat cleanup even on exception
+          let gradX = null;
+          let gradY = null;
+          try {
+            gradX = new cv.Mat();
+            gradY = new cv.Mat();
+            cv.Sobel(_gray, gradX, cv.CV_8U, 1, 0, 3);
+            cv.Sobel(_gray, gradY, cv.CV_8U, 0, 1, 3);
+            cv.addWeighted(gradX, 0.5, gradY, 0.5, 0, _dst);
+            cv.imshow(_canvas, _dst);
+          } finally {
+            if (gradX) gradX.delete();
+            if (gradY) gradY.delete();
+          }
+        }
         else if (_mode === 'harris') {
           // Harris response
           cv.cornerHarris(_gray, _harris, 2, 3, 0.04);
-          
+
           // Show original frame first
           cv.imshow(_canvas, _src);
-          
+
           // Threshold the harris response and draw dots manually
-          const data = _harris.data32F;
-          const rows = _harris.rows;
-          const cols = _harris.cols;
-          
-          // Optimization: Pre-calculate threshold and use a faster loop
-          const maxVal = _getMax(_harris);
+          const data   = _harris.data32F;
+          const rows   = _harris.rows;
+          const cols   = _harris.cols;
+
+          const maxVal   = _getMax(_harris);
           const threshold = 0.01 * maxVal;
 
           _ctx.fillStyle = '#ff00c8';
@@ -156,7 +225,7 @@ const FilterEngine = (() => {
             for (let x = 0; x < cols; x += 4) {
               if (data[rowOffset + x] > threshold) {
                 _ctx.beginPath();
-                _ctx.arc(x, y, 2.5, 0, 6.28); // 2*PI approx
+                _ctx.arc(x, y, 2.5, 0, 6.28);
                 _ctx.fill();
               }
             }
@@ -170,7 +239,7 @@ const FilterEngine = (() => {
   }
 
   function _getMax(mat) {
-    let result = cv.minMaxLoc(mat);
+    const result = cv.minMaxLoc(mat);
     return result.maxVal;
   }
 

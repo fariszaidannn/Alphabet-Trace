@@ -116,10 +116,13 @@ async function init() {
       const mode = opt.dataset.mode;
       filterMenu.querySelectorAll('.filter-option').forEach(o => o.classList.remove('active'));
       opt.classList.add('active');
-      filterIcon.textContent = opt.textContent.trim().split(' ')[0];
+      // Bug fix #6: read emoji from dedicated [data-icon] span — no textContent splitting
+      const iconEl = opt.querySelector('[data-icon]');
+      filterIcon.textContent = iconEl ? iconEl.textContent : '🎥';
       const label = document.getElementById('filter-label');
       if (label) {
-        label.textContent = opt.querySelector('span').textContent;
+        const nameEl = opt.querySelector('span:not([data-icon])');
+        label.textContent = nameEl ? nameEl.textContent : mode;
       }
       filterBtn.setAttribute('aria-expanded', 'false');
       filterMenu.classList.add('hidden');
